@@ -1,0 +1,35 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-es2015-classes",
+    [
+      "import",
+      // use for weui
+      // {
+      //   "style": "../../../react-weui.min.css",
+      //   "libraryDirectory": "build/packages/components",
+      //   "libraryName": "react-weui"
+      // },
+      // {
+      //   "style": "style/weui.min.css",
+      //   "libraryDirectory": "dist",
+      //   "libraryName": "weui"
+      // },
+      {
+        "style": "../styles",
+        "libraryDirectory": "", // default is lib
+        "libraryName": "material-ui"
+      }
+    ]
+  ]
+}

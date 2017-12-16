@@ -1,0 +1,43 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true, // 支持jsx
+      "modules": false
+    }
+  },
+  "plugins": [
+    "babel",
+    "react"
+  ],
+  "rules": {
+    "strict": 0,
+    // "semi": 2,
+    "quotes": [
+      1,
+      "single"
+    ],
+    "indent": [
+      "warn",
+      2
+    ],
+    "no-unused-vars": [
+      1,
+      {
+        // 允许声明未使用变量
+        "vars": "local",
+        // 参数不检查
+        "args": "none"
+      }
+    ],
+    //必须使用 if(){} 中的{}
+    "curly": [
+      2,
+      "all"
+    ]
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  }
+}
