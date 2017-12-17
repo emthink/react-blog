@@ -3,7 +3,8 @@
 ### Table of Contents
 
 -   [app.js](#appjs)
--   [log](#log)
+-   [main.js](#mainjs)
+-   [App](#app)
 
 ## app.js
 
@@ -13,6 +14,12 @@
 
 -   **author**: codingplayboy
 
-## log
+## main.js
+
+项目根组件文件
+
+## App
+
+**Extends Component**
 
 项目根组件

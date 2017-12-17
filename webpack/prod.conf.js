@@ -30,7 +30,7 @@ const options = {
             progressive: true // 创建基准jpeg文件
           },
           optipng: {
-            optimizationLevel: 4, // 优化级别，0-7，值越大，压缩越多
+            optimizationLevel: 4 // 优化级别，0-7，值越大，压缩越多
           },
           pngquant: {
             quality: '75-90', // 压缩质量，0-100，值越高，质量越高

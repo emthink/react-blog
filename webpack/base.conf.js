@@ -6,7 +6,6 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-
 module.exports = function (options) {
   const PUBLICPATH = options.publicPath || '/assets/'
   const ROOTPATH = options.ROOTPATH
@@ -15,8 +14,8 @@ module.exports = function (options) {
     name: 'browser',
     context: path.resolve(ROOTPATH, 'src/'),
     entry: {
-      app: options._DEV_ ?
-        entry.concat(`webpack-hot-middleware/client?path=${PUBLICPATH}__webpack_hmr`) : entry
+      app: options._DEV_
+        ? entry.concat(`webpack-hot-middleware/client?path=${PUBLICPATH}__webpack_hmr`) : entry
     },
     output: {
       publicPath: PUBLICPATH,
