@@ -57,6 +57,7 @@ module.exports = function (options) {
       extensions: ['.js', '.jsx', '.json']
     },
     plugins: (options.beforePlugins || []).concat([
+      new webpack.DefinePlugin(options.globals),
       // 抽取js同时与ExtractTextPlugin搭配为公共块（common chunk）抽取样式文件
       new webpack.optimize.CommonsChunkPlugin({
         name: 'common', // chunk name, 不指定filename时，生成文件的默认文件名

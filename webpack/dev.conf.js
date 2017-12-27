@@ -6,7 +6,8 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const PUBLICPATH = '/assets/'
-const PORT = '9090'
+const PORT = '9098'
+const ENV = process.env.NODE_ENV || 'dev'
 
 const options = {
   // publicPath: '/', // for `ip:port`, not need `ip:port/${output}`
@@ -20,8 +21,15 @@ const options = {
         limit: 10000,
         name: '[path][name].[ext]?[hash:8]'
       }
-
     }]
+  },
+  globals: {
+    'process.env': {
+      'NODE_ENV': JSON.stringify(ENV)
+    },
+    '__DEV__': ENV === 'dev',
+    '__PROD__': ENV === 'production',
+    '__TEST__': ENV === 'test'
   },
   beforePlugins: [
     new webpack.HotModuleReplacementPlugin()
@@ -39,8 +47,14 @@ module.exports = function (args) {
       inline: true,
       hot: true,
       port: PORT,
+      host: '0.0.0.0',
       proxy: {
-        '*': `http://localhost:${PORT}/${PUBLICPATH}/`
+        '/': {
+          bypass: function (req, res, proxyOptions) {
+            console.log('Skipping proxy for browser request.')
+            return `${PUBLICPATH}index.html`
+          }
+        }
       }
     },
     plugins: []

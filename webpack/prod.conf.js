@@ -5,6 +5,7 @@
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ENV = process.env.NODE_ENV || 'production'
 
 // 拓展配置
 const options = {
@@ -53,6 +54,14 @@ const options = {
         name: '[path][name]-[hash:8].[ext]'
       }
     }]
+  },
+  globals: {
+    'process.env': {
+      'NODE_ENV': JSON.stringify(ENV)
+    },
+    '__DEV__': ENV === 'dev',
+    '__PROD__': ENV === 'production',
+    '__TEST__': ENV === 'test'
   }
 }
 
