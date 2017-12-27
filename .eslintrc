@@ -39,10 +39,16 @@
       2,
       "all"
     ],
-    "no-useless-constructor": 0
+    "no-useless-constructor": 0,
+    "react/prop-types": 0
   },
   "env": {
     "browser": true,
     "es6": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__TEST__": false,
+    "__PROD__": false
   }
 }
