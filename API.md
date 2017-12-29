@@ -2,24 +2,265 @@
 
 ### Table of Contents
 
--   [app.js](#appjs)
--   [main.js](#mainjs)
+-   [Component](#component)
+-   [Component](#component-1)
+-   [Component](#component-2)
+-   [Component](#component-3)
 -   [App](#app)
+-   [fork](#fork)
+-   [combineReducers](#combinereducers)
+-   [combineReducers](#combinereducers-1)
+-   [makeRootReducer](#makerootreducer)
+-   [injectReducer](#injectreducer)
+-   [Routes](#routes)
+-   [React](#react)
+-   [takeLatest](#takelatest)
+-   [takeLatest](#takelatest-1)
+-   [toggleMobileSideBar](#togglemobilesidebar)
+-   [toggleMobileSideBar](#togglemobilesidebar-1)
+-   [requestPostList](#requestpostlist)
+-   [requestPostList](#requestpostlist-1)
+-   [receivePostList](#receivepostlist)
+-   [receivePostList](#receivepostlist-1)
+-   [getPostList](#getpostlist)
+-   [getPostList](#getpostlist-1)
+-   [getPostListSaga](#getpostlistsaga)
+-   [getPostListSaga](#getpostlistsaga-1)
+-   [axios](#axios)
+-   [APIBaseUrl](#apibaseurl)
+-   [moment](#moment)
+-   [formatPostListData](#formatpostlistdata)
 
-## app.js
+## Component
 
-项目入口文件
+src/app.js
 
 **Meta**
 
 -   **author**: codingplayboy
 
-## main.js
+## Component
 
-项目根组件文件
+src/routes/index.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## Component
+
+src/routes/Home/index.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## Component
+
+按需加载组件
+
+**Meta**
+
+-   **author**: codingplayboy
 
 ## App
 
 **Extends Component**
 
 项目根组件
+
+## fork
+
+src/store/index.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## combineReducers
+
+src/store/CreateStore.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## combineReducers
+
+src/store/OperateReducer.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## makeRootReducer
+
+创建根Reducer
+
+**Parameters**
+
+-   `reducers`  
+-   `asyncReducers` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** reducers
+
+## injectReducer
+
+插入异步Reducers
+
+**Parameters**
+
+-   `store` **any** redux store
+-   `$1` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `$1.key`  
+    -   `$1.reducer`  
+
+## Routes
+
+项目路由组件
+
+## React
+
+/about
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## takeLatest
+
+src/store/appFlux.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## takeLatest
+
+src/store/appFlux.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## toggleMobileSideBar
+
+切换顶部／左部导航栏ActionCreator
+
+**Parameters**
+
+-   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 负载参数 (optional, default `{}`)
+
+## toggleMobileSideBar
+
+切换顶部／左部导航栏ActionCreator
+
+**Parameters**
+
+-   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 负载参数 (optional, default `{}`)
+
+## requestPostList
+
+请求文章列表ActionCreator
+
+**Parameters**
+
+-   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+## requestPostList
+
+请求文章列表ActionCreator
+
+**Parameters**
+
+-   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+## receivePostList
+
+接收文章列表ActionCreator
+
+**Parameters**
+
+-   `payload` **any** 
+
+## receivePostList
+
+接收文章列表ActionCreator
+
+**Parameters**
+
+-   `payload` **any** 
+
+## getPostList
+
+请求文章列表方法
+
+**Parameters**
+
+-   `params` **any** 请求参数
+     eg: {
+       page: Num,
+       per_page: Num
+     } (optional, default `{page:1,per_page:10}`)
+
+## getPostList
+
+请求文章列表方法
+
+**Parameters**
+
+-   `params` **any** 请求参数
+     eg: {
+       page: Num,
+       per_page: Num
+     } (optional, default `{page:1,per_page:10}`)
+
+## getPostListSaga
+
+处理请求文章列表Saga
+
+**Parameters**
+
+-   `payload` **any** 请求参数负载
+    -   `payload.payload`  
+
+## getPostListSaga
+
+处理请求文章列表Saga
+
+**Parameters**
+
+-   `payload` **any** 请求参数负载
+    -   `payload.payload`  
+
+## axios
+
+src/api/fetch.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## APIBaseUrl
+
+src/api/api.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## moment
+
+src/store/dataAdapter.js
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## formatPostListData
+
+适配PostList数组
+
+**Parameters**
+
+-   `data` **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** postList
+
+Returns **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** new list of post
