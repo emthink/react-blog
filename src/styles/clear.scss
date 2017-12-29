@@ -1,0 +1,18 @@
+html, body {
+  height: 100%;
+}
+#app {
+  min-height: 100%;
+  position: relative;
+}
+p {
+  margin: 0;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}

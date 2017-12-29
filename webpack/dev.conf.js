@@ -6,7 +6,7 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const PUBLICPATH = '/assets/'
-const PORT = '9098'
+const PORT = '9090'
 const ENV = process.env.NODE_ENV || 'dev'
 
 const options = {

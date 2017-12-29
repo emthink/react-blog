@@ -7,7 +7,7 @@
     "doc": "./node_modules/.bin/documentation build src/app.js -f md > API.md",
     "lint": "eslint --cache --fix src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=dev yarn lint && yarn doc && webpack-dev-server",
+    "start": "cross-env NODE_ENV=dev yarn lint && yarn doc && webpack-dev-server --open",
     "build": "cross-env NODE_ENV=production yarn lint && yarn doc && webpack"
   },
   "keywords": [
@@ -17,10 +17,21 @@
   "author": "Jiangang Xiong",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
+    "history": "^4.7.2",
     "material-ui": "next",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "moment": "^2.20.1",
+    "normalize.css": "^7.0.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "next",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -56,6 +67,8 @@
     "postcss-loader": "^2.0.5",
     "postcss-scss": "^1.0.0",
     "precss": "^1.4.0",
+    "prop-types": "^15.6.0",
+    "redux-devtools": "^3.4.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.18.1",
     "url-loader": "^0.5.8",
