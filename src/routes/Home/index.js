@@ -5,28 +5,11 @@
  * @date 2017/12/19
  */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { withStyles } from 'material-ui/styles'
-import Posts from '../../components/Posts/'
-import Pagination from '../../components/Pagination/'
-import { actions as AppActions } from '../../store/appFlux'
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 15
-  },
-  paper: {
-    padding: 16,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  },
-  right: {
-    textAlign: 'left'
-  }
-})
+import Posts from 'components/Posts/'
+import Pagination from 'components/Pagination/'
+import { actions as AppActions } from 'store/appFlux'
 
 class Home extends Component {
   constructor (...arg) {
@@ -99,10 +82,6 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
 const mapStateToProps = (state, ownProps) => {
   return {
     ids: state.app.posts.ids,
@@ -118,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -5,7 +5,7 @@
  * @date 2017/12/23
  */
 import { put, call, takeLatest } from 'redux-saga/effects'
-import { fetch, API } from '../api/'
+import { fetch, API } from 'api/'
 import { formatPostListData } from './dataAdapter'
 
 const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar'

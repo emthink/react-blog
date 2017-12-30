@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Button, Typography } from 'material-ui'
+import { Grid, Button } from 'material-ui'
 import { withStyles } from 'material-ui/styles'
 import blue from 'material-ui/colors/blue'
 

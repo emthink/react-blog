@@ -52,6 +52,13 @@ module.exports = function (options) {
       alias: {
         'entryHtml$': path.resolve(ROOTPATH, 'src/index.html'),
         components: path.resolve(ROOTPATH, 'src/components/'),
+        containers: path.resolve(ROOTPATH, 'src/containers/'),
+        routes: path.resolve(ROOTPATH, 'src/routes/'),
+        store: path.resolve(ROOTPATH, 'src/store/'),
+        api: path.resolve(ROOTPATH, 'src/api/'),
+        config: path.resolve(ROOTPATH, 'src/config/'),
+        constants: path.resolve(ROOTPATH, 'src/constants/'),
+        helper: path.resolve(ROOTPATH, 'src/helper/'),
         styles: path.resolve(ROOTPATH, 'src/styles/')
       },
       extensions: ['.js', '.jsx', '.json']

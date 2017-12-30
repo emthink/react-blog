@@ -3,7 +3,7 @@
  * @author codingplayboy
  * @date 2017/12/23
  */
-import React, { Component } from 'react'
+import React from 'react'
 import { withStyles } from 'material-ui/styles'
 import { Grid, Typography } from 'material-ui'
 

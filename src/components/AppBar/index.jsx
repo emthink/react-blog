@@ -15,8 +15,6 @@ import IconButton from 'material-ui/IconButton'
 import { Menu as MenuIcon, Close as CloseIcon,
   ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon} from 'material-ui-icons'
 import { withStyles } from 'material-ui/styles'
-// import { ChevronLeftIcon } from 'material-ui-icons/ChevronLeft'
-// import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 
 const drawerWidth = 240
 

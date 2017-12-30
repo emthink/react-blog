@@ -4,8 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import { Grid } from 'material-ui'
 // import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList'
 import Subheader from 'material-ui/List/ListSubheader'
-import { CircularProgress } from 'material-ui/Progress';
-import IconButton from 'material-ui/IconButton'
+import { CircularProgress } from 'material-ui/Progress'
 import Post from '../Post/'
 
 const styles = theme => ({

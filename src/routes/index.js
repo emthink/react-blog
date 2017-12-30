@@ -16,9 +16,9 @@ import CopyRight from 'components/CopyRight/'
 import Layout from 'components/Layout/'
 import Home from './Home/'
 import About from './About/'
-import { history } from '../store/'
-import AsyncComponent from '../helper/AsyncComponent'
-import { actions as AppActions } from '../store/appFlux'
+import { history } from 'store/'
+import AsyncComponent from 'helper/AsyncComponent'
+import { actions as AppActions } from 'store/appFlux'
 
 const Topics = AsyncComponent(() =>
   import(/* webpackChunkName: "topics" */ './Topics/')
