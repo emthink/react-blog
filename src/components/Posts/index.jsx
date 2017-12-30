@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import { Grid } from 'material-ui'
 // import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList'
 import Subheader from 'material-ui/List/ListSubheader'
+import { CircularProgress } from 'material-ui/Progress';
 import IconButton from 'material-ui/IconButton'
 import Post from '../Post/'
 
@@ -44,14 +45,23 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       maxWidth: 420
     }
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)'
   }
 })
 
 function TitlebarGridList (props) {
   const { classes, ids, posts } = props
+
+  const renderPosts = () => {
+    if (ids && ids.length) {
+      return ids.map(id => (
+        <Grid key={posts[id].id} item className={classes.postWrap}>
+          <Post post={posts[id]} />
+        </Grid>
+      ))
+    }
+
+    return <CircularProgress color='accent' />
+  }
 
   return (
     <div className={classes.root}>
@@ -59,11 +69,7 @@ function TitlebarGridList (props) {
       <Grid container className={classes.container}>
         <Grid item xs={12}>
           <Grid container justify='center' spacing={16}>
-            {ids.map(id => (
-              <Grid key={posts[id].id} item className={classes.postWrap}>
-                <Post post={posts[id]} />
-              </Grid>
-            ))}
+            {renderPosts()}
           </Grid>
         </Grid>
       </Grid>

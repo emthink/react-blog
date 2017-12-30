@@ -5,7 +5,7 @@
  * @date 2017/12/14
  */
 import React, { Component } from 'react'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 import { withStyles } from 'material-ui/styles'
 import { bindActionCreators } from 'redux'
@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import BlogHeader from 'components/Header/'
 import RouterBar from 'components/RouterBar/'
 import CopyRight from 'components/CopyRight/'
+import Layout from 'components/Layout/'
 import Home from './Home/'
 import About from './About/'
 import { history } from '../store/'
@@ -71,10 +72,14 @@ class Routes extends Component {
               container: classes.routerBar
             }} />
             <div className={classes.content}>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/posts/:id' component={Article} />
-              <Route path='/about' component={About} />
-              <Route path='/topics' component={Topics} />
+              <Layout>
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/posts/:id' component={Article} />
+                  <Route path='/about' component={About} />
+                  <Route path='/topics' component={Topics} />
+                </Switch>
+              </Layout>
             </div>
           </div>
           <CopyRight />

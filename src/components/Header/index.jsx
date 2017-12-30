@@ -1,25 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'material-ui'
-import { withStyles } from 'material-ui/styles'
 import BlogAppBar from '../AppBar/'
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 30
-  },
-  paper: {
-    padding: 16,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  },
-  right: {
-    textAlign: 'left'
-  },
-  nav: {
-  }
-})
 
 const BlogHeader = (props) => {
   return (
@@ -37,4 +19,4 @@ const BlogHeader = (props) => {
   )
 }
 
-export default withStyles(styles)(BlogHeader)
+export default BlogHeader

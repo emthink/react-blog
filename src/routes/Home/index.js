@@ -9,7 +9,6 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
-import { Grid } from 'material-ui'
 import Posts from '../../components/Posts/'
 import Pagination from '../../components/Pagination/'
 import { actions as AppActions } from '../../store/appFlux'
@@ -57,39 +56,21 @@ class Home extends Component {
   }
 
   render () {
-    const { classes, ids, posts, total, totalPages } = this.props
+    const { ids, posts, total, totalPages } = this.props
     const { page, pageSize, startPage } = this.state
 
     return (
-      <Grid container spacing={24} className={classes.root}>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={9}>
-          <Posts ids={ids} posts={posts} />
-          <Pagination
-            total={total}
-            totalPages={totalPages}
-            page={page}
-            pageSize={pageSize}
-            startPage={startPage}
-            handlePageBack={this.handlePageBack}
-            handlePageNext={this.handlePageNext} />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={3}>
-          暂时未开放，敬请期待
-        </Grid>
-        {/* <Grid item xs={12} sm={12} md={12}>
-                                                                                                          <Paper className={classes.paper}>
-                                                                                                            xs=6 sm=3
-                                                                                                          </Paper>
-                                                                                                        </Grid> */}
-      </Grid>
+      <div>
+        <Posts ids={ids} posts={posts} pageSize={pageSize} />
+        <Pagination
+          total={total}
+          totalPages={totalPages}
+          page={page}
+          pageSize={pageSize}
+          startPage={startPage}
+          handlePageBack={this.handlePageBack}
+          handlePageNext={this.handlePageNext} />
+      </div>
     )
   }
 

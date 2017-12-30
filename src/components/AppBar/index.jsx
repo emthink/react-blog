@@ -5,15 +5,18 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Toolbar, Hidden, Typography } from 'material-ui'
+import { Link } from 'react-router-dom'
+import { Toolbar, Hidden, Typography } from 'material-ui'
 import { FormControl } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
-import TextField from 'material-ui/TextField'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
-import { Menu as MenuIcon, Close as CloseIcon } from 'material-ui-icons'
+import { Menu as MenuIcon, Close as CloseIcon,
+  ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon} from 'material-ui-icons'
 import { withStyles } from 'material-ui/styles'
+// import { ChevronLeftIcon } from 'material-ui-icons/ChevronLeft'
+// import ChevronRightIcon from 'material-ui-icons/ChevronRight'
 
 const drawerWidth = 240
 
@@ -26,10 +29,6 @@ const styles = (theme) => {
       flex: 1
     },
     appBar: {
-      [theme.breakpoints.down('md')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        left: `${drawerWidth}px`
-      }
     },
     navButton: {
       marginLeft: -12,
@@ -61,9 +60,19 @@ const styles = (theme) => {
         backgroundColor: theme.palette.common.lightWhite
       }
     },
-    drawerHeader: theme.mixins.toolbar,
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: '0 8px',
+      ...theme.mixins.toolbar
+    },
     drawerPaper: {
-      width: drawerWidth
+      width: drawerWidth,
+      top: 56,
+      [theme.breakpoints.up('sm')]: {
+        top: 64
+      }
     }
   }
 }
@@ -91,7 +100,7 @@ class BlogAppBar extends Component {
               aria-label='open Nav' onClick={this.handleDrawerToggle}>
               {isMobileSideBarShow ? <CloseIcon /> : <MenuIcon /> }
             </IconButton>
-            <Typography type='title' color='inherit'>
+            <Typography component={Link} to='/' type='title' color='inherit'>
               {title}
             </Typography>
             <div color='inherit' className={classes.flex}>
@@ -99,7 +108,7 @@ class BlogAppBar extends Component {
                 {this.props.children}
               </Hidden>
             </div>
-            <FormControl className={{ [classes.searchField]: true, [classes.hidden]: isMobileSideBarShow }}>
+            <FormControl className={classes.searchField}>
               <InputLabel
                 FormControlClasses={{
                   focused: classes.inputLabelFocused
@@ -138,7 +147,11 @@ class BlogAppBar extends Component {
             }}
             className={classes.sideNavZIndex}
           >
-            <div className={classes.drawerHeader} />
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={this.handleDrawerToggle}>
+                {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              </IconButton>
+            </div>
             {this.props.children}
           </Drawer>
         </Hidden>

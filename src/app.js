@@ -34,10 +34,6 @@ const style = {
  * @extends Component
  */
 class App extends Component {
-  shouldComponentUpdate () {
-    return false
-  }
-
   componentDidMount () {}
 
   componentDidCatch (error, info) {
