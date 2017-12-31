@@ -1,8 +1,9 @@
 /**
  * 项目入口文件
- * @file src/app.js
+ * @name app.js
+ * @kind file
+ * @copyright src/app.js 2017/12/14
  * @author codingplayboy
- * @date 2017/12/14
  */
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
@@ -31,7 +32,9 @@ const style = {
 /**
  * 项目根组件
  * @class App
+ * @kind class
  * @extends Component
+ * @see src/app.js
  */
 class App extends Component {
   componentDidMount () {}

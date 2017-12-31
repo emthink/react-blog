@@ -1,8 +1,20 @@
+/**
+ * 文章正文路由文件
+ * @name Article/index.js
+ * @copyright src/routes/Article/index.js
+ * @author codingplayboy
+ */
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Article from 'components/Article/'
 
+/**
+ * 文章正文容器组件
+ * @class ArticleContainer
+ * @extends Component
+ * @see src/routes/Article/index.js
+ */
 class ArticleContainer extends Component {
   componentDidMount () {
     const { post } = this.props

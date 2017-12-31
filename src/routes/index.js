@@ -1,8 +1,9 @@
 /**
- * 项目路由入口文件
- * @file src/routes/index.js
+ * 应用路由入口文件
+ * @name 路由入口文件
+ * @kind file
+ * @copyright src/routes/index.js 2017/12/14
  * @author codingplayboy
- * @date 2017/12/14
  */
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router'
@@ -45,18 +46,23 @@ const styles = theme => ({
     padding: theme.spacing.unit * 1,
     paddingTop: theme.spacing.unit * 1,
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing.unit * 2,
+      paddingTop: theme.spacing.unit * 1
     },
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing.unit * 3
+      padding: theme.spacing.unit * 3,
+      paddingTop: theme.spacing.unit * 1
     }
   },
   content: {}
 })
 
 /**
- * 项目路由组件
+ * 应用路由组件
  * @class Routes
+ * @kind class
+ * @extends Component
+ * @see src/routes/index.js
  */
 class Routes extends Component {
   componentDidMount () {

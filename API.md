@@ -2,46 +2,41 @@
 
 ### Table of Contents
 
--   [Component](#component)
--   [Component](#component-1)
--   [Component](#component-2)
+-   [app.js](#appjs)
 -   [App](#app)
--   [fork](#fork)
--   [combineReducers](#combinereducers)
--   [combineReducers](#combinereducers-1)
+-   [store/index.js](#storeindexjs)
+-   [makeRootSaga](#makerootsaga)
+-   [injectSagas](#injectsagas)
+-   [location.js](#locationjs)
+-   [pushRoute](#pushroute)
+-   [replaceRoute](#replaceroute)
+-   [CreateStotre.js](#createstotrejs)
+-   [OperateReducer.js](#operatereducerjs)
 -   [makeRootReducer](#makerootreducer)
 -   [injectReducer](#injectreducer)
+-   [路由入口文件](#路由入口文件)
 -   [Routes](#routes)
+-   [首页主体路由文件](#首页主体路由文件)
+-   [Home](#home)
 -   [React](#react)
--   [takeLatest](#takelatest)
+-   [Article/index.js](#articleindexjs)
+-   [ArticleContainer](#articlecontainer)
+-   [AppFlux.js](#appfluxjs)
 -   [toggleMobileSideBar](#togglemobilesidebar)
 -   [requestPostList](#requestpostlist)
 -   [receivePostList](#receivepostlist)
 -   [getPostListSaga](#getpostlistsaga)
--   [moment](#moment)
+-   [AppSaga](#appsaga)
+-   [dataAdapter.js](#dataadapterjs)
 -   [formatPostListData](#formatpostlistdata)
 
-## Component
+## app.js
 
-src/app.js
-
-**Meta**
-
--   **author**: codingplayboy
-
-## Component
-
-src/routes/index.js
+项目入口文件
 
 **Meta**
 
--   **author**: codingplayboy
-
-## Component
-
-src/routes/Home/index.js
-
-**Meta**
+-   **copyright**: src/app.js 2017/12/14
 
 -   **author**: codingplayboy
 
@@ -49,33 +44,96 @@ src/routes/Home/index.js
 
 **Extends Component**
 
+-   **See: src/app.js**
+
 项目根组件
 
-## fork
+## store/index.js
 
-src/store/index.js
+store模块入口
 
 **Meta**
+
+-   **copyright**: src/store/index.js
 
 -   **author**: codingplayboy
 
-## combineReducers
+## makeRootSaga
 
-src/store/CreateStore.js
+-   **See: src/store/index.js**
+
+fork所有saga分支
+
+**Parameters**
+
+-   `sagas` **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** saga数组
+
+## injectSagas
+
+-   **See: src/store/index.js**
+
+插入异步saga，更新store中fork的saga
+
+**Parameters**
+
+-   `store` **any** 
+-   `param` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `param.key`  
+    -   `param.sagas`  
+
+## location.js
+
+封装更新路由的actionCreators
 
 **Meta**
+
+-   **copyright**: src/store/location.js
 
 -   **author**: codingplayboy
 
-## combineReducers
+## pushRoute
 
-src/store/OperateReducer.js
+-   **See: src/store/location.js**
+
+使用histytory.push方式更新路由
+
+**Parameters**
+
+-   `payload` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** route pathname
+
+## replaceRoute
+
+-   **See: src/store/location.js**
+
+使用histytory.preplace方式更新路由
+
+**Parameters**
+
+-   `payload` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** route pathname
+
+## CreateStotre.js
+
+创建redux store
 
 **Meta**
+
+-   **copyright**: src/store/CreateStore.js 2017/12/19
+
+-   **author**: codingplayboy
+
+## OperateReducer.js
+
+处理Reducers方法
+
+**Meta**
+
+-   **copyright**: src/store/OperateReducer.js 2017/12/19
 
 -   **author**: codingplayboy
 
 ## makeRootReducer
+
+-   **See: src/store/OperateReducer.js**
 
 创建根Reducer
 
@@ -86,6 +144,8 @@ src/store/OperateReducer.js
 
 ## injectReducer
 
+-   **See: src/store/OperateReducer.js**
+
 插入异步Reducers
 
 **Parameters**
@@ -95,9 +155,41 @@ src/store/OperateReducer.js
     -   `$1.key`  
     -   `$1.reducer`  
 
+## 路由入口文件
+
+应用路由入口文件
+
+**Meta**
+
+-   **copyright**: src/routes/index.js 2017/12/14
+
+-   **author**: codingplayboy
+
 ## Routes
 
-项目路由组件
+**Extends Component**
+
+-   **See: src/routes/index.js**
+
+应用路由组件
+
+## 首页主体路由文件
+
+应用首页模块
+
+**Meta**
+
+-   **copyright**: src/routes/Home/index.js 2017/12/19
+
+-   **author**: codingplayboy
+
+## Home
+
+**Extends Component**
+
+-   **See: src/routes/Home/index.js**
+
+首页主体容器组件
 
 ## React
 
@@ -107,39 +199,86 @@ src/store/OperateReducer.js
 
 -   **author**: codingplayboy
 
-## takeLatest
+## Article/index.js
 
-src/store/appFlux.js
+文章正文路由文件
 
 **Meta**
+
+-   **copyright**: src/routes/Article/index.js
+
+-   **author**: codingplayboy
+
+## ArticleContainer
+
+**Extends Component**
+
+-   **See: src/routes/Article/index.js**
+
+文章正文容器组件
+
+## AppFlux.js
+
+应用初始化时期望处理的异步请求管理Sagas模块
+
+**Meta**
+
+-   **copyright**: src/store/appFlux.js 2017/12/23
 
 -   **author**: codingplayboy
 
 ## toggleMobileSideBar
 
+-   **See: src/store/appFlux.js**
+
 切换顶部／左部导航栏ActionCreator
 
 **Parameters**
 
--   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 负载参数 (optional, default `{}`)
+-   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)?** 负载参数 (optional, default `{}`)
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** [action] action object
 
 ## requestPostList
+
+-   **See: src/store/appFlux.js**
 
 请求文章列表ActionCreator
 
 **Parameters**
 
--   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 请求文章列表参数负载
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** [action] action object
 
 ## receivePostList
+
+-   **See: src/store/appFlux.js**
 
 接收文章列表ActionCreator
 
 **Parameters**
 
--   `payload` **any** 
+-   `payload` **any** 接收文章列表数据负载
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** [action] action object
 
 ## 
+
+-   **See: src/store/appFlux.js**
+
+应用初始reducer
+
+**Parameters**
+
+-   `state` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 应用状态树节点状态对象
+-   `action` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** action object
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** state 应用新状态对象
+
+## 
+
+-   **See: src/store/appFlux.js**
 
 请求文章列表方法
 
@@ -153,6 +292,8 @@ src/store/appFlux.js
 
 ## getPostListSaga
 
+-   **See: src/store/appFlux.js**
+
 处理请求文章列表Saga
 
 **Parameters**
@@ -160,15 +301,29 @@ src/store/appFlux.js
 -   `payload` **any** 请求参数负载
     -   `payload.payload`  
 
-## moment
+## AppSaga
 
-src/store/dataAdapter.js
+-   **See: src/store/appFlux.js**
+
+定义AppSaga
+
+**Parameters**
+
+-   `action`  
+
+## dataAdapter.js
+
+数据适配功能文件
 
 **Meta**
+
+-   **copyright**: src/store/dataAdapter.js 2017/12/28
 
 -   **author**: codingplayboy
 
 ## formatPostListData
+
+-   **See: src/store/dataAdapter.js**
 
 适配PostList数组
 

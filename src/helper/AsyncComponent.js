@@ -1,7 +1,8 @@
 /**
- * 按需加载组件
+ * 封装实现按需加载组件的高阶组件
+ * @name AsyncComponent.js
+ * @copyright src/helper/AsyncComponent 2017/12/19
  * @author codingplayboy
- * @date 2017/12/19
  */
 import React, { Component } from 'react'
 

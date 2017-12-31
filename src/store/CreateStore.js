@@ -1,8 +1,9 @@
 /**
  * 创建redux store
- * @file src/store/CreateStore.js
+ * @name CreateStotre.js
+ * @kind file
+ * @copyright src/store/CreateStore.js 2017/12/19
  * @author codingplayboy
- * @date 2017/12/19
  */
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'

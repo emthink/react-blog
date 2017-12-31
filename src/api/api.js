@@ -1,8 +1,8 @@
 /**
- * 应用请求API定义文件
- * @file src/api/api.js
+ * 应用请求API配置文件
+ * @name api.js
+ * @copyright src/api/api.js 2017/12/28
  * @author codingplayboy
- * @date 2017/12/28
  */
 
 export const APIBaseUrl = '//blog.codingplayboy.com/wp-json/wp'

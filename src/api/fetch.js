@@ -1,7 +1,9 @@
 /**
  * 封装接口请求模块文件
- * @file src/api/fetch.js
+ * @name fetch.js
+ * @copyright src/api/fetch.js
  * @author codingplayboy
+ * @see axios
  */
 
 import axios from 'axios'

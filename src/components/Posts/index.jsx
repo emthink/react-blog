@@ -14,7 +14,7 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    padding: '0 2px',
+    padding: 0,
     paddingBottom: 20,
     background: theme.palette.background.paper
   },

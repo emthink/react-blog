@@ -1,8 +1,9 @@
 /**
- * 应用首页组件
- * @file src/routes/Home/index.js
+ * 应用首页模块
+ * @name 首页主体路由文件
+ * @kind file
+ * @copyright src/routes/Home/index.js 2017/12/19
  * @author codingplayboy
- * @date 2017/12/19
  */
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
@@ -12,6 +13,12 @@ import Pagination from 'components/Pagination/'
 import { pushRoute, replaceRoute } from 'store/'
 import { actions as AppActions } from 'store/appFlux'
 
+/**
+ * 首页主体容器组件
+ * @class Home
+ * @extends Component
+ * @see src/routes/Home/index.js
+ */
 class Home extends Component {
   constructor (...arg) {
     super(...arg)

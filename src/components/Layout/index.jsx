@@ -1,3 +1,9 @@
+/**
+ * 应用主体部分布局模块
+ * @name Layout/index.jsx
+ * @copyright src/components/Layout/index.jsx
+ * @author codingplayboy
+ */
 import React from 'react'
 import { withStyles } from 'material-ui/styles'
 import { Grid } from 'material-ui'
@@ -5,13 +11,18 @@ import { Grid } from 'material-ui'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 15
+    marginTop: 5
   },
   container: {
     background: '#ffffff'
   }
 })
 
+/**
+ * 应用主体布局组件
+ * @kind function Component
+ * @param {*} props
+ */
 function Layout (props) {
   const { classes } = props
   return (

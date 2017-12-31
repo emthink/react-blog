@@ -1,8 +1,9 @@
 /**
  * 数据适配功能文件
- * @file src/store/dataAdapter.js
+ * @name dataAdapter.js
+ * @kind file
+ * @copyright src/store/dataAdapter.js 2017/12/28
  * @author codingplayboy
- * @date 2017/12/28
  */
 import moment from 'moment'
 
@@ -10,6 +11,7 @@ import moment from 'moment'
  * 适配PostList数组
  * @param {array} data postList
  * @return {array} new list of post
+ * @see src/store/dataAdapter.js
  */
 export const formatPostListData = (data) => {
   let len = data.length

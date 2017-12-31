@@ -1,3 +1,9 @@
+/**
+ * 应用启动组件模块
+ * @name Launch/index.jsx
+ * @file src/components/Layout/index.jsx 2017/12/31
+ * @author codingplayboy
+ */
 import React, { Component } from 'react'
 import { Avatar } from 'material-ui'
 import { withStyles } from 'material-ui/styles'
@@ -50,6 +56,11 @@ const styles = theme => ({
   }
 })
 
+/**
+ * 应用启动加载组件
+ * @class Launch
+ * @extends Component
+ */
 class Launch extends Component {
   constructor (...arg) {
     super(...arg)

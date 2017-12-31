@@ -1,8 +1,9 @@
 /**
- * 应用初始化时期望处理的异步请求管理Sagas
- * @file src/store/appFlux.js
+ * 应用初始化时期望处理的异步请求管理Sagas模块
+ * @name AppFlux.js
+ * @kind file
+ * @copyright src/store/appFlux.js 2017/12/23
  * @author codingplayboy
- * @date 2017/12/23
  */
 import { put, call, takeLatest } from 'redux-saga/effects'
 import { fetch, API } from 'api/'
@@ -14,7 +15,9 @@ const RECEIVE_POST_LIST = 'RECEIVE_POST_LIST'
 
 /**
  * 切换顶部／左部导航栏ActionCreator
- * @param {object} payload 负载参数
+ * @param {object} [payload] 负载参数
+ * @return {object} [action] action object
+ * @see src/store/appFlux.js
  */
 function toggleMobileSideBar (payload = {}) {
   return {
@@ -25,7 +28,9 @@ function toggleMobileSideBar (payload = {}) {
 
 /**
  * 请求文章列表ActionCreator
- * @param {object} payload
+ * @param {object} payload 请求文章列表参数负载
+ * @return {object} [action] action object
+ * @see src/store/appFlux.js
  */
 function requestPostList (payload) {
   return {
@@ -36,7 +41,9 @@ function requestPostList (payload) {
 
 /**
  * 接收文章列表ActionCreator
- * @param {*} payload
+ * @param {*} payload 接收文章列表数据负载
+ * @return {object} [action] action object
+ * @see src/store/appFlux.js
  */
 function receivePostList (payload) {
   return {
@@ -60,6 +67,13 @@ var initialState = {
   }
 }
 
+/**
+ * 应用初始reducer
+ * @param {object} state 应用状态树节点状态对象
+ * @param {object} action action object
+ * @return {object} state 应用新状态对象
+ * @see src/store/appFlux.js
+ */
 export default function appReducer (state = initialState, action) {
   const { payload } = action
   switch (action.type) {
@@ -88,6 +102,7 @@ const initParam = {
 
 /**
  * 请求文章列表方法
+ * @see src/store/appFlux.js
  * @param {*} params 请求参数
  *  eg: {
  *    page: Num,
@@ -115,6 +130,7 @@ function getPostList (params = {
 
 /**
  * 处理请求文章列表Saga
+ * @see src/store/appFlux.js
  * @param {*} payload 请求参数负载
  */
 function * getPostListSaga ({ payload }) {
@@ -122,7 +138,10 @@ function * getPostListSaga ({ payload }) {
   yield put(receivePostList(data))
 }
 
-// 定义AppSaga
+/**
+ * 定义AppSaga
+ * @see src/store/appFlux.js
+ */
 export function * AppSaga (action) {
   // 接收最近一次请求，然后调用getPostListSaga子Saga
   yield takeLatest(REQUEST_POST_LIST, getPostListSaga)
