@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import BlogHeader from 'components/Header/'
 import RouterBar from 'components/RouterBar/'
 import CopyRight from 'components/CopyRight/'
+import Launch from 'components/Launch/'
 import Layout from 'components/Layout/'
 import Home from './Home/'
 import About from './About/'
@@ -72,7 +73,7 @@ class Routes extends Component {
     const { classes, toggleMobileSideBar } = this.props
     return (
       <ConnectedRouter history={history}>
-        <div className={classes.root}>
+        <Launch className={classes.root}>
           <BlogHeader toggleMobileSideBar={toggleMobileSideBar} />
           <div className={classes.wrap}>
             <RouterBar classes={{
@@ -91,7 +92,7 @@ class Routes extends Component {
             </div>
           </div>
           <CopyRight />
-        </div>
+        </Launch>
       </ConnectedRouter>
     )
   }

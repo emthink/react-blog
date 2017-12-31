@@ -17,7 +17,6 @@
 -   [toggleMobileSideBar](#togglemobilesidebar)
 -   [requestPostList](#requestpostlist)
 -   [receivePostList](#receivepostlist)
--   [getPostList](#getpostlist)
 -   [getPostListSaga](#getpostlistsaga)
 -   [moment](#moment)
 -   [formatPostListData](#formatpostlistdata)
@@ -140,7 +139,7 @@ src/store/appFlux.js
 
 -   `payload` **any** 
 
-## getPostList
+## 
 
 请求文章列表方法
 
@@ -150,7 +149,7 @@ src/store/appFlux.js
      eg: {
        page: Num,
        per_page: Num
-     } (optional, default `{page:1,per_page:10}`)
+     }
 
 ## getPostListSaga
 
