@@ -4,6 +4,7 @@
  * @author codingplayboy
  */
 import { fork } from 'redux-saga/effects'
+import { pushRoute, replaceRoute } from './location'
 import createStore, { history } from './CreateStore'
 import { makeRootReducer, injectReducer } from './OperateReducer'
 
@@ -24,6 +25,8 @@ const injectSagas = (store, { key, sagas }) => {
 export default createStore
 export {
   history,
+  pushRoute,
+  replaceRoute,
   injectReducer,
   makeRootReducer,
   makeRootSaga,

@@ -81,6 +81,11 @@ export default function appReducer (state = initialState, action) {
   }
 }
 
+const initParam = {
+  page: 1,
+  per_page: 10
+}
+
 /**
  * 请求文章列表方法
  * @param {*} params 请求参数
@@ -95,7 +100,7 @@ function getPostList (params = {
 }) {
   return fetch({
     ...API.getPostList,
-    data: params
+    data: Object.assign({}, initParam, params)
   }).then(res => {
     if (res) {
       let data = formatPostListData(res.data)

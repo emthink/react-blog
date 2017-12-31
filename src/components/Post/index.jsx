@@ -69,7 +69,7 @@ class RecipeReviewCard extends Component {
   }
 
   get postRoute () {
-    return `/posts/${this.props.post.id}`
+    return `/posts/${this.props.post.id}/`
   }
 
   render () {

@@ -59,7 +59,14 @@ const styles = theme => ({
  */
 class Routes extends Component {
   componentDidMount () {
-    this.props.requestPostList()
+    const { pathname } = history.location
+    let id = parseInt(pathname.replace(/\/page\/(\d+)\//, '$1') || 0, 10)
+    let param = {}
+
+    if (id) {
+      param.id = id
+    }
+    this.props.requestPostList(param)
   }
   render () {
     const { classes, toggleMobileSideBar } = this.props
@@ -75,9 +82,10 @@ class Routes extends Component {
               <Layout>
                 <Switch>
                   <Route exact path='/' component={Home} />
-                  <Route exact path='/posts/:id' component={Article} />
-                  <Route path='/about' component={About} />
-                  <Route path='/topics' component={Topics} />
+                  <Route exact path='/page/:id/' component={Home} />
+                  <Route exact path='/posts/:id/' component={Article} />
+                  <Route path='/about/' component={About} />
+                  <Route path='/topics/' component={Topics} />
                 </Switch>
               </Layout>
             </div>

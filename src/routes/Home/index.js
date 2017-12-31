@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Posts from 'components/Posts/'
 import Pagination from 'components/Pagination/'
+import { pushRoute, replaceRoute } from 'store/'
 import { actions as AppActions } from 'store/appFlux'
 
 class Home extends Component {
@@ -18,7 +19,7 @@ class Home extends Component {
     this.state = {
       posts: [],
       startPage: 1,
-      page: 1,
+      page: parseInt(this.props.match.params.id || 0, 10) || 1,
       pageSize: 10,
       totalPages: 0,
       total: 0
@@ -58,6 +59,7 @@ class Home extends Component {
   }
 
   handlePageNext () {
+    this.props.push(`/page/${this.state.page + 1}/`)
     this.setState((prevState) => {
       return {
         page: prevState.page + 1
@@ -66,6 +68,12 @@ class Home extends Component {
   }
 
   handlePageBack () {
+    const { page } = this.state
+    if (page === 2) {
+      this.props.push('/')
+    } else {
+      this.props.push(`/page/${page - 1}/`)
+    }
     this.setState((prevState) => {
       return {
         page: prevState.page - 1
@@ -93,7 +101,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    requestPostList: AppActions.requestPostList
+    requestPostList: AppActions.requestPostList,
+    push: pushRoute,
+    replace: replaceRoute
   }, dispatch)
 }
 

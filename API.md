@@ -5,7 +5,6 @@
 -   [Component](#component)
 -   [Component](#component-1)
 -   [Component](#component-2)
--   [Component](#component-3)
 -   [App](#app)
 -   [fork](#fork)
 -   [combineReducers](#combinereducers)
@@ -15,19 +14,11 @@
 -   [Routes](#routes)
 -   [React](#react)
 -   [takeLatest](#takelatest)
--   [takeLatest](#takelatest-1)
 -   [toggleMobileSideBar](#togglemobilesidebar)
--   [toggleMobileSideBar](#togglemobilesidebar-1)
 -   [requestPostList](#requestpostlist)
--   [requestPostList](#requestpostlist-1)
 -   [receivePostList](#receivepostlist)
--   [receivePostList](#receivepostlist-1)
 -   [getPostList](#getpostlist)
--   [getPostList](#getpostlist-1)
 -   [getPostListSaga](#getpostlistsaga)
--   [getPostListSaga](#getpostlistsaga-1)
--   [axios](#axios)
--   [APIBaseUrl](#apibaseurl)
 -   [moment](#moment)
 -   [formatPostListData](#formatpostlistdata)
 
@@ -50,14 +41,6 @@ src/routes/index.js
 ## Component
 
 src/routes/Home/index.js
-
-**Meta**
-
--   **author**: codingplayboy
-
-## Component
-
-按需加载组件
 
 **Meta**
 
@@ -133,22 +116,6 @@ src/store/appFlux.js
 
 -   **author**: codingplayboy
 
-## takeLatest
-
-src/store/appFlux.js
-
-**Meta**
-
--   **author**: codingplayboy
-
-## toggleMobileSideBar
-
-切换顶部／左部导航栏ActionCreator
-
-**Parameters**
-
--   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 负载参数 (optional, default `{}`)
-
 ## toggleMobileSideBar
 
 切换顶部／左部导航栏ActionCreator
@@ -164,22 +131,6 @@ src/store/appFlux.js
 **Parameters**
 
 -   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-
-## requestPostList
-
-请求文章列表ActionCreator
-
-**Parameters**
-
--   `payload` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-
-## receivePostList
-
-接收文章列表ActionCreator
-
-**Parameters**
-
--   `payload` **any** 
 
 ## receivePostList
 
@@ -201,18 +152,6 @@ src/store/appFlux.js
        per_page: Num
      } (optional, default `{page:1,per_page:10}`)
 
-## getPostList
-
-请求文章列表方法
-
-**Parameters**
-
--   `params` **any** 请求参数
-     eg: {
-       page: Num,
-       per_page: Num
-     } (optional, default `{page:1,per_page:10}`)
-
 ## getPostListSaga
 
 处理请求文章列表Saga
@@ -221,31 +160,6 @@ src/store/appFlux.js
 
 -   `payload` **any** 请求参数负载
     -   `payload.payload`  
-
-## getPostListSaga
-
-处理请求文章列表Saga
-
-**Parameters**
-
--   `payload` **any** 请求参数负载
-    -   `payload.payload`  
-
-## axios
-
-src/api/fetch.js
-
-**Meta**
-
--   **author**: codingplayboy
-
-## APIBaseUrl
-
-src/api/api.js
-
-**Meta**
-
--   **author**: codingplayboy
 
 ## moment
 

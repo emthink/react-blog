@@ -7,8 +7,7 @@
 
 export const actions = {}
 
-var initialState = {
-}
+var initialState = {}
 
 export default function homeReducer (state = initialState, action) {
   switch (action.type) {
