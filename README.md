@@ -37,27 +37,43 @@ And I will record all resources and process through the entire development of th
 9. `docs`: 文档目录；
 10. `README.md`: 项目说明文档； 
 11. `src`: 开发代码目录
-  1. ├──`api` 请求API
-  2. ├──`styles` 样式
-  3. ├──`components` 展示型组件
-  4. ├──`config` 全局配置
-  5. ├──`constants` 常量
-  6. ├──`containers` 容器组件
-  7. ├──`helper` 辅助／工具函数
-  8. ├──`store` redux store相关
-  9. ├──`middlewares` 中间件
-  10. ├──`routes` 应用路由模块
-  11. ├──`services` 应用服务模块
-  12. ├──`index.html` 应用入口html
-  13. ├──`app.js` 项目根组件文件
+   1. ├──`api` 请求API
+   2. ├──`styles` 样式
+   3. ├──`components` 展示型组件
+   4. ├──`config` 全局配置
+   5. ├──`constants` 常量
+   6. ├──`containers` 容器组件
+   7. ├──`helper` 辅助／工具函数
+   8. ├──`store` redux store相关
+   9. ├──`middlewares` 中间件
+   10. ├──`routes` 应用路由模块
+   11. ├──`services` 应用服务模块
+   12. ├──`index.html` 应用入口html
+   13. ├──`app.js` 项目根组件文件
+
+## Product Prototype
+
+自己画的UI原型图，比较简陋，权且看看，欢迎吐槽，嘿嘿👀。
+
+### PC UI
+
+![react-blog-design.png](./docs/imgs/react-blog-design.png)
+
+### Mobile UI
+
+![React Blog Mobile UI](./docs/imgs/react-blog-design-mobile.png)
+
+### Mobile Side Nav UI
+
+![Mobile Side Nav UI](./docs/imgs/react-blog-design-mobile-expand.png)
 
 ## Development Log
 
 1. 项目基础布局（使用[material-ui](https://material-ui-next.com/）)
   1. 搭建首页基本结构
-  1. 响应式展示
+  2. 响应式展示
 2. 首页文章列表：
   1. 初始加载及翻页
-  1. 列表自适应排布展示
+  2. 列表自适应排布展示
 3. 侧滑导航栏切换
 4. 底部版权及联系方式声明组件  
