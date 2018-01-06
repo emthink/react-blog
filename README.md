@@ -23,6 +23,7 @@ And I will record all resources and process through the entire development of th
 1. [Webpack自动化构建实践指南](https://github.com/codingplayboy/react-blog/blob/master/docs/initWebpack.md)
 2. [刷新页面react-router路由访问失败问题解决方案](https://github.com/codingplayboy/react-blog/blob/master/docs/webpack-dev-server-reflush-404.md)
 3. [React应用架构设计](https://github.com/codingplayboy/react-blog/blob/master/docs/react-app-structure.md)
+4. [响应式Web设计与实现思路](https://github.com/codingplayboy/react-blog/blob/master/docs/responsive-ui.md)
 
 ## Structure introduction
 
