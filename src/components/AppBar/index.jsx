@@ -27,6 +27,7 @@ const styles = (theme) => {
       flex: 1
     },
     appBar: {
+      boxShadow: '0px 0px 6px -1px rgba(0, 0, 0, 0.2)'
     },
     navButton: {
       marginLeft: -12,
@@ -48,7 +49,7 @@ const styles = (theme) => {
     },
     inputLabelFocused: {
       marginTop: 5,
-      color: theme.palette.common.lightWhite,
+      color: 'rgba(51, 51, 51, 0.9)',
       [theme.breakpoints.down('sm')]: {
         display: 'none'
       }
@@ -92,9 +93,9 @@ class BlogAppBar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position='fixed' color='primary' className={{[classes.appBar]: isMobileSideBarShow}}>
+        <AppBar position='fixed' color='primary' className={`${classes.appBar} header`}>
           <Toolbar>
-            <IconButton className={classes.navButton} color='contrast'
+            <IconButton className={`${classes.navButton} base-text`} color='contrast'
               aria-label='open Nav' onClick={this.handleDrawerToggle}>
               {isMobileSideBarShow ? <CloseIcon /> : <MenuIcon /> }
             </IconButton>
