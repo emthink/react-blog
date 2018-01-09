@@ -14,15 +14,9 @@ import ShareIcon from 'material-ui-icons/Share'
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 
-const style = {
-  content: {
-    'p': {
-      maxHeight: 190
-    }
-  }
-}
 const styles = theme => ({
   card: {
+    boxShadow: '0px 0px 5px -1px rgba(0, 0, 0, 0.2) inset'
     // width: '100%',
     // paddingLeft: 10,
     // paddingRight: 10,
@@ -31,6 +25,9 @@ const styles = theme => ({
     //   maxWidth: 300,
     //   padding: 0
     // }
+  },
+  cardContent: {
+    paddingTop: 0
   },
   media: {
     height: 194
@@ -50,8 +47,11 @@ const styles = theme => ({
   flexGrow: {
     flex: '1 1 auto'
   },
+  content: {
+    lineHeight: 1.6
+  },
   readMore: {
-    marginTop: 10
+    marginTop: 13
   }
 })
 
@@ -97,8 +97,8 @@ class RecipeReviewCard extends Component {
             image='/static/images/cards/paella.jpg'
             title='Contemplative Reptile'
           /> */}
-          <CardContent>
-            <Typography component='p' style={style.content}
+          <CardContent className={classes.cardContent}>
+            <Typography component='p' className={`${classes.content} base-text`}
               dangerouslySetInnerHTML={{__html: post.excerpt}} />
             <Button raised type='accent' className={classes.readMore}>
               <Link to={this.postRoute}>ReadMore</Link>
@@ -124,7 +124,7 @@ class RecipeReviewCard extends Component {
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>
-            <CardContent dangerouslySetInnerHTML={{ __html: post.content }} />
+            <CardContent className={'article'} dangerouslySetInnerHTML={{ __html: post.content }} />
           </Collapse>
         </Card>
       </div>
