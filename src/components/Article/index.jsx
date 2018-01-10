@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
 import { CircularProgress } from 'material-ui/Progress'
+import hljs from 'highlight'
 
 const styles = theme => ({
   root: {
@@ -23,9 +24,21 @@ const styles = theme => ({
 })
 
 class Article extends Component {
+  componentDidMount () {
+    if (this.props.post.content) {
+      this.initHighlight()
+    }
+  }
+
+  componentDidUpdate () {
+    if (this.props.post.content) {
+      this.initHighlight()
+    }
+  }
+
   render () {
     return (
-      <div className={`${this.props.classes.root} article`}>
+      <div className={`${this.props.classes.root} article markdown-wrap`}>
         {this.renderPost()}
       </div>
     )
@@ -38,11 +51,21 @@ class Article extends Component {
       return <CircularProgress color='accent' />
     }
 
-    return <div className={`${classes.container} base-text`}> 
+    return <div className={`${classes.container} base-text`}>
       <h1>{post.title}</h1>
       <div dangerouslySetInnerHTML={{__html: post.content}} />
     </div>
   }
+
+  initHighlight () {
+    document.querySelectorAll('pre code').forEach((code) => {
+      hljs && hljs.highlightBlock(code)
+    })
+  }
+}
+
+Article.defaultProps = {
+  post: {}
 }
 
 export default withStyles(styles)(Article)

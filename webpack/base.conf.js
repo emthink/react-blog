@@ -83,6 +83,9 @@ module.exports = function (options) {
           removeAttributeQuotes: true
         }
       })
-    ])
+    ]),
+    externals: {
+      'highlight': 'hljs'
+    }
   }
 }
