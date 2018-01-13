@@ -7,9 +7,11 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import 'styles/highlight.scss'
 import 'styles/markdown.scss'
+import 'styles/highlight.scss'
+import 'styles/toc.scss'
 import Article from 'components/Article/'
+import { setPostId } from './flux'
 
 /**
  * 文章正文容器组件
@@ -20,7 +22,15 @@ import Article from 'components/Article/'
 class ArticleContainer extends Component {
   componentDidMount () {
     const { post } = this.props
-    if (!post || !post.title) {
+    if (post && post.id) {
+      this.props.setPostId(post.id);
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { id } = nextProps.post || {};
+    if (id && id !== this.props.post.id) {
+      this.props.setPostId(id);
     }
   }
 
@@ -34,15 +44,21 @@ class ArticleContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { ids = [], data } = state.app.posts
-  const { id } = ownProps.match.params
+  const { postId } = ownProps.match.params
 
   return {
-    post: (ids.indexOf(id) && data[id])
+    post: (ids.indexOf(postId) && data[postId])
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch)
+  return bindActionCreators({
+    setPostId: setPostId
+  }, dispatch)
+}
+
+ArticleContainer.defaultProps = {
+  post: {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleContainer)

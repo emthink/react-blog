@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
 import { CircularProgress } from 'material-ui/Progress'
+import ReactMarkdown from 'react-markdown'
 import hljs from 'highlight'
+
+const sourceTypes = {
+  markdown: 'markdown'
+}
+const sourceTypeKey = 'sourceType'
 
 const styles = theme => ({
   root: {
@@ -11,6 +17,12 @@ const styles = theme => ({
     justifyContent: 'center'
   },
   container: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%'
+  },
+  articleContainer: {
     width: '100%',
     padding: 10,
     maxWidth: 700,
@@ -21,7 +33,7 @@ const styles = theme => ({
       padding: 20
     }
   }
-})
+});
 
 class Article extends Component {
   componentDidMount () {
@@ -37,8 +49,9 @@ class Article extends Component {
   }
 
   render () {
+    const { classes } = this.props
     return (
-      <div className={`${this.props.classes.root} article markdown-wrap`}>
+      <div className={`${classes.root} article markdown-wrap`}>
         {this.renderPost()}
       </div>
     )
@@ -47,14 +60,26 @@ class Article extends Component {
   renderPost () {
     const { classes, post } = this.props
 
+    const renderContent = () => {
+      const { post } = this.props
+      if (post[sourceTypeKey] === sourceTypes.markdown) {
+        return <ReactMarkdown source={post.content} />
+      }
+      return <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    }
+
     if (!post || !post.title) {
       return <CircularProgress color='accent' />
     }
 
-    return <div className={`${classes.container} base-text`}>
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{__html: post.content}} />
-    </div>
+    return (
+      <div className={classes.container}>
+        <div className={`${classes.articleContainer} article-content base-text`}>
+          <h1>{post.title}</h1>
+          {renderContent()}
+        </div>
+      </div>
+    )
   }
 
   initHighlight () {

@@ -16,7 +16,7 @@
   ],
   "rules": {
     "strict": 0,
-    // "semi": 2,
+    "semi": 0,
     "quotes": [
       1,
       "single"

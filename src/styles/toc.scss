@@ -1,0 +1,31 @@
+@import './variable.scss';
+.article-toc {
+    width: 100%;
+    ul,
+    li {
+        list-style: none;
+    }
+    .article-toc-wrap {
+        position: fixed;
+        bottom: 0;
+        padding: 6px 0 20px;
+        .toc-header {
+            background-color: $backgroundColor;
+            .toc-header {
+                position: static;
+            }
+        }
+        .toc-item-wrap {
+            .toc-header {
+                position: static;
+            }
+        }
+    }
+}
+
+#toc_container {
+    display: none;
+    @media screen and (max-width: 959px) {
+        display: block;
+    }
+}

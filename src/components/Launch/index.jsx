@@ -35,7 +35,7 @@ const styles = theme => ({
     left: 0,
     top: 0,
     marginTop: 30,
-    height: 26,
+    height: 28,
     overflowX: 'hidden',
     textAlign: 'center'
   },
@@ -76,7 +76,7 @@ class Launch extends Component {
   componentDidMount () {
     this.timer = setInterval(() => {
       this.progress()
-    }, 100)
+    }, 80)
   }
 
   componentWillUnmount () {

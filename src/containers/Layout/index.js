@@ -7,6 +7,7 @@
 import React from 'react'
 import { withStyles } from 'material-ui/styles'
 import { Grid } from 'material-ui'
+import TOC from 'containers/TOC/'
 
 const styles = theme => ({
   root: {
@@ -15,6 +16,11 @@ const styles = theme => ({
   },
   container: {
     background: '#ffffff'
+  },
+  articleToc: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    }
   }
 })
 
@@ -37,11 +43,15 @@ function Layout (props) {
         </div>
       </Grid>
       <Grid
+        className={'right-tools'}
         item
         xs={12}
         sm={12}
         md={3}>
         暂时未开放，敬请期待
+        <div className={`${classes.articleToc} article-toc`}>
+          <TOC />
+        </div>
       </Grid>
     </Grid>
   )

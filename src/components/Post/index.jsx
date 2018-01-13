@@ -16,7 +16,7 @@ import MoreVertIcon from 'material-ui-icons/MoreVert'
 
 const styles = theme => ({
   card: {
-    boxShadow: '0px 0px 5px -1px rgba(0, 0, 0, 0.2) inset'
+    boxShadow: '0px 0px 8px 0px rgba(0, 0, 0, 0.2) inset'
     // width: '100%',
     // paddingLeft: 10,
     // paddingRight: 10,
@@ -124,7 +124,7 @@ class RecipeReviewCard extends Component {
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout='auto' unmountOnExit>
-            <CardContent className={'article'} dangerouslySetInnerHTML={{ __html: post.content }} />
+            <CardContent className={'article'} />
           </Collapse>
         </Card>
       </div>

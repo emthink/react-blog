@@ -29,6 +29,7 @@
 -   [AppSaga](#appsaga)
 -   [dataAdapter.js](#dataadapterjs)
 -   [formatPostListData](#formatpostlistdata)
+-   [flux.js](#fluxjs)
 
 ## app.js
 
@@ -332,3 +333,13 @@ Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 -   `data` **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** postList
 
 Returns **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** new list of post
+
+## flux.js
+
+正文页flux文件
+
+**Meta**
+
+-   **copyright**: src/routes/Article/flux.js 2017/01/12
+
+-   **author**: codingplayboy
