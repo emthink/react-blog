@@ -5,11 +5,11 @@
  * @author codingplayboy
  */
 
-export const APIBaseUrl = '//blog.codingplayboy.com/wp-json/wp'
+export const APIBaseUrl = '//blog.codingplayboy.com/wp-json/wp';
 
 export default {
   getPostList: {
     url: '/v2/posts',
     method: 'GET'
   }
-}
+};

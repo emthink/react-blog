@@ -5,30 +5,30 @@
  * @copyright src/routes/index.js 2017/12/14
  * @author codingplayboy
  */
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router'
-import { ConnectedRouter } from 'react-router-redux'
-import { withStyles } from 'material-ui/styles'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import BlogHeader from 'components/Header/'
-import RouterBar from 'components/RouterBar/'
-import CopyRight from 'components/CopyRight/'
-import Launch from 'components/Launch/'
-import Layout from 'containers/Layout/'
-import Home from './Home/'
-import About from './About/'
-import { history } from 'store/'
-import AsyncComponent from 'helper/AsyncComponent'
-import { actions as AppActions } from 'store/appFlux'
-import { setPostId } from './Article/flux'
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router';
+import { ConnectedRouter } from 'react-router-redux';
+import { withStyles } from 'material-ui/styles';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import BlogHeader from 'components/Header/';
+import RouterBar from 'components/RouterBar/';
+import CopyRight from 'components/CopyRight/';
+import Launch from 'components/Launch/';
+import Layout from 'containers/Layout/';
+import Home from './Home/';
+import About from './About/';
+import { history } from 'store/';
+import AsyncComponent from 'helper/AsyncComponent';
+import { actions as AppActions } from 'store/appFlux';
+import { setPostId } from './Article/flux';
 
 const Topics = AsyncComponent(() =>
   import(/* webpackChunkName: "topics" */ './Topics/')
-)
+);
 const Article = AsyncComponent(() =>
   import(/* webpackChunkName: "article" */ './Article/')
-)
+);
 
 const styles = theme => ({
   root: {
@@ -56,7 +56,7 @@ const styles = theme => ({
     }
   },
   content: {}
-})
+});
 
 /**
  * 应用路由组件
@@ -67,18 +67,18 @@ const styles = theme => ({
  */
 class Routes extends Component {
   componentDidMount () {
-    const { pathname } = history.location
-    let results = pathname.match(/\/posts\/(\d+)\//) || []
-    let param = {}
+    const { pathname } = history.location;
+    let results = pathname.match(/\/posts\/(\d+)\//) || [];
+    let param = {};
 
     if (results[1]) {
-      param.id = results[1]
-      this.props.setPostId(results[1])
+      param.id = results[1];
+      this.props.setPostId(results[1]);
     }
-    this.props.requestPostList(param)
+    this.props.requestPostList(param);
   }
   render () {
-    const { classes, toggleMobileSideBar } = this.props
+    const { classes, toggleMobileSideBar } = this.props;
     return (
       <ConnectedRouter history={history}>
         <Launch className={classes.root}>
@@ -102,22 +102,22 @@ class Routes extends Component {
           <CopyRight />
         </Launch>
       </ConnectedRouter>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     isMobileSideBarShow: state.app.isMobileSideBarShow
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     toggleMobileSideBar: AppActions.toggleMobileSideBar,
     requestPostList: AppActions.requestPostList,
     setPostId: setPostId
-  }, dispatch)
-}
+  }, dispatch);
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Routes))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Routes));

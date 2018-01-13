@@ -5,13 +5,13 @@
  * @copyright src/store/appFlux.js 2017/12/23
  * @author codingplayboy
  */
-import { put, call, takeLatest } from 'redux-saga/effects'
-import { fetch, API } from 'api/'
-import { formatPostListData } from './dataAdapter'
+import { put, call, takeLatest } from 'redux-saga/effects';
+import { fetch, API } from 'api/';
+import { formatPostListData } from './dataAdapter';
 
-const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar'
-const REQUEST_POST_LIST = 'REQUEST_POST_LIST'
-const RECEIVE_POST_LIST = 'RECEIVE_POST_LIST'
+const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar';
+const REQUEST_POST_LIST = 'REQUEST_POST_LIST';
+const RECEIVE_POST_LIST = 'RECEIVE_POST_LIST';
 
 /**
  * 切换顶部／左部导航栏ActionCreator
@@ -23,7 +23,7 @@ function toggleMobileSideBar (payload = {}) {
   return {
     type: TOGGLE_APP_SIDE_BAR,
     payload: payload
-  }
+  };
 }
 
 /**
@@ -36,7 +36,7 @@ function requestPostList (payload) {
   return {
     type: REQUEST_POST_LIST,
     payload: payload
-  }
+  };
 }
 
 /**
@@ -49,12 +49,12 @@ function receivePostList (payload) {
   return {
     type: RECEIVE_POST_LIST,
     payload: payload
-  }
+  };
 }
 
 export const actions = {
   toggleMobileSideBar, requestPostList, receivePostList
-}
+};
 
 // 初始化状态
 var initialState = {
@@ -65,7 +65,7 @@ var initialState = {
     total: 0,
     totalPages: 0
   }
-}
+};
 
 /**
  * 应用初始reducer
@@ -75,12 +75,12 @@ var initialState = {
  * @see src/store/appFlux.js
  */
 export default function appReducer (state = initialState, action) {
-  const { payload } = action
+  const { payload } = action;
   switch (action.type) {
   case TOGGLE_APP_SIDE_BAR:
     return Object.assign({}, state, {
       isMobileSideBarShow: action.payload.isMobileSideBarShow
-    })
+    });
   case RECEIVE_POST_LIST:
     return Object.assign({}, state, {
       posts: {
@@ -89,16 +89,16 @@ export default function appReducer (state = initialState, action) {
         total: payload.total,
         totalPages: payload.totalPages
       }
-    })
+    });
   default:
-    return state
+    return state;
   }
 }
 
 const initParam = {
   page: 1,
   per_page: 10
-}
+};
 
 /**
  * 请求文章列表方法
@@ -118,14 +118,14 @@ function getPostList (params = {
     data: Object.assign({}, initParam, params)
   }).then(res => {
     if (res) {
-      let data = formatPostListData(res.data)
+      let data = formatPostListData(res.data);
       return {
         total: parseInt(res.headers['X-WP-Total'.toLowerCase()], 10),
         totalPages: parseInt(res.headers['X-WP-TotalPages'.toLowerCase()], 10),
         ...data
-      }
+      };
     }
-  })
+  });
 }
 
 /**
@@ -134,8 +134,8 @@ function getPostList (params = {
  * @param {*} payload 请求参数负载
  */
 function * getPostListSaga ({ payload }) {
-  const data = yield call(getPostList, payload)
-  yield put(receivePostList(data))
+  const data = yield call(getPostList, payload);
+  yield put(receivePostList(data));
 }
 
 /**
@@ -144,5 +144,5 @@ function * getPostListSaga ({ payload }) {
  */
 export function * AppSaga (action) {
   // 接收最近一次请求，然后调用getPostListSaga子Saga
-  yield takeLatest(REQUEST_POST_LIST, getPostListSaga)
+  yield takeLatest(REQUEST_POST_LIST, getPostListSaga);
 }

@@ -4,7 +4,7 @@
  * @copyright src/store/OperateReducer.js 2017/12/19
  * @author codingplayboy
  */
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 /**
  * 创建根Reducer
@@ -14,8 +14,8 @@ import { combineReducers } from 'redux'
 export const makeRootReducer = (reducers) => {
   return combineReducers({
     ...reducers
-  })
-}
+  });
+};
 
 /**
  * 插入异步Reducers
@@ -26,11 +26,11 @@ export const makeRootReducer = (reducers) => {
  */
 export const injectReducer = (store, { key, reducer }) => {
   if (Object.hasOwnProperty.call(store.asyncReducers, key)) {
-    return
+    return;
   }
 
-  store.asyncReducers[key] = reducer
-  store.replaceReducer(makeRootReducer(store.asyncReducers))
-}
+  store.asyncReducers[key] = reducer;
+  store.replaceReducer(makeRootReducer(store.asyncReducers));
+};
 
-export default makeRootReducer
+export default makeRootReducer;

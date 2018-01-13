@@ -5,7 +5,7 @@
  * @copyright src/store/dataAdapter.js 2017/12/28
  * @author codingplayboy
  */
-import moment from 'moment'
+import moment from 'moment';
 
 /**
  * 适配PostList数组
@@ -14,15 +14,15 @@ import moment from 'moment'
  * @see src/store/dataAdapter.js
  */
 export const formatPostListData = (data) => {
-  let len = data.length
+  let len = data.length;
   let result = {
     ids: [],
     data: {}
-  }
+  };
   if (len > 0) {
     while (len--) {
-      let post = data[len]
-      result.ids.unshift(post.id)
+      let post = data[len];
+      result.ids.unshift(post.id);
       Object.assign(result.data, {
         [post.id]: {
           id: post.id,
@@ -32,8 +32,8 @@ export const formatPostListData = (data) => {
           content: post.content.rendered,
           modified: moment(post.modified).format('YYYY-MM-DD HH:mm:ss')
         }
-      })
+      });
     }
-    return result
+    return result;
   }
-}
+};

@@ -4,10 +4,10 @@
  * @copyright src/components/Layout/index.jsx
  * @author codingplayboy
  */
-import React from 'react'
-import { withStyles } from 'material-ui/styles'
-import { Grid } from 'material-ui'
-import TOC from 'containers/TOC/'
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import { Grid } from 'material-ui';
+import TOC from 'containers/TOC/';
 
 const styles = theme => ({
   root: {
@@ -22,7 +22,7 @@ const styles = theme => ({
       display: 'none'
     }
   }
-})
+});
 
 /**
  * 应用主体布局组件
@@ -30,7 +30,7 @@ const styles = theme => ({
  * @param {*} props
  */
 function Layout (props) {
-  const { classes } = props
+  const { classes } = props;
   return (
     <Grid container spacing={24} className={classes.root}>
       <Grid
@@ -54,7 +54,7 @@ function Layout (props) {
         </div>
       </Grid>
     </Grid>
-  )
+  );
 }
 
-export default withStyles(styles)(Layout)
+export default withStyles(styles)(Layout);

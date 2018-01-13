@@ -5,13 +5,13 @@
  * @date 2017/12/23
  */
 
-export const actions = {}
+export const actions = {};
 
-var initialState = {}
+var initialState = {};
 
 export default function homeReducer (state = initialState, action) {
   switch (action.type) {
   default:
-    return state
+    return state;
   }
 }

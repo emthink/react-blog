@@ -5,32 +5,32 @@
  * @copyright src/app.js 2017/12/14
  * @author codingplayboy
  */
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import 'babel-polyfill'
-import './styles/clear.scss'
-import 'normalize.css/normalize.css'
-import './styles/common.scss'
-import createStore, { makeRootSaga } from './store/'
-import Routes from './routes/'
-import appReducer, { AppSaga } from './store/AppFlux'
-import articleReducer from './routes/Article/flux'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import 'babel-polyfill';
+import './styles/clear.scss';
+import 'normalize.css/normalize.css';
+import './styles/common.scss';
+import createStore, { makeRootSaga } from './store/';
+import Routes from './routes/';
+import appReducer, { AppSaga } from './store/AppFlux';
+import articleReducer from './routes/Article/flux';
 
-const rootSaga = makeRootSaga([AppSaga])
+const rootSaga = makeRootSaga([AppSaga]);
 
 // 调用createStore方法创建store
 const store = createStore({}, {
   app: appReducer,
   article: articleReducer
-}, rootSaga)
+}, rootSaga);
 
 const style = {
   container: {
     height: '100%',
     minHeight: '99%'
   }
-}
+};
 
 /**
  * 项目根组件
@@ -44,11 +44,11 @@ class App extends Component {
 
   componentDidCatch (error, info) {
     // You can also log the error to an error reporting service
-    console.log(error, info)
+    console.log(error, info);
   }
 
   render () {
-    const { store } = this.props
+    const { store } = this.props;
 
     return (
       <Provider store={store}>
@@ -56,7 +56,7 @@ class App extends Component {
           <Routes />
         </div>
       </Provider>
-    )
+    );
   }
 }
 
@@ -64,4 +64,4 @@ class App extends Component {
 ReactDOM.render(
   <App store={store} />,
   document.getElementById('app')
-)
+);

@@ -4,14 +4,14 @@
  * @copyright src/routes/Article/index.js
  * @author codingplayboy
  */
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import 'styles/markdown.scss'
-import 'styles/highlight.scss'
-import 'styles/toc.scss'
-import Article from 'components/Article/'
-import { setPostId } from './flux'
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import 'styles/markdown.scss';
+import 'styles/highlight.scss';
+import 'styles/toc.scss';
+import Article from 'components/Article/';
+import { setPostId } from './flux';
 
 /**
  * 文章正文容器组件
@@ -21,7 +21,7 @@ import { setPostId } from './flux'
  */
 class ArticleContainer extends Component {
   componentDidMount () {
-    const { post } = this.props
+    const { post } = this.props;
     if (post && post.id) {
       this.props.setPostId(post.id);
     }
@@ -35,30 +35,30 @@ class ArticleContainer extends Component {
   }
 
   render () {
-    const { post } = this.props
+    const { post } = this.props;
     return (
       <Article post={post} />
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { ids = [], data } = state.app.posts
-  const { postId } = ownProps.match.params
+  const { ids = [], data } = state.app.posts;
+  const { postId } = ownProps.match.params;
 
   return {
     post: (ids.indexOf(postId) && data[postId])
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     setPostId: setPostId
-  }, dispatch)
-}
+  }, dispatch);
+};
 
 ArticleContainer.defaultProps = {
   post: {}
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleContainer);
