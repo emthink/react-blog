@@ -18,6 +18,12 @@ And I will record all resources and process through the entire development of th
 
 1. [API](https://github.com/codingplayboy/react-blog/blob/master/API.md)
 
+## Publish
+
+I will update the site continuously, now, please see [React Blog](http://react.codingplayboy.com) (have your Try).
+
+![React Blog Example](http://blog.codingplayboy.com/wp-content/uploads/2018/01/react-blog-example-1.png)
+
 ## Development Process
 
 1. [Webpack自动化构建实践指南](https://github.com/codingplayboy/react-blog/blob/master/docs/initWebpack.md)
