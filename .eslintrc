@@ -23,7 +23,10 @@
     ],
     "indent": [
       "warn",
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "no-unused-vars": [
       1,

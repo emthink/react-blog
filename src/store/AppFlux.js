@@ -77,21 +77,21 @@ var initialState = {
 export default function appReducer (state = initialState, action) {
   const { payload } = action;
   switch (action.type) {
-  case TOGGLE_APP_SIDE_BAR:
-    return Object.assign({}, state, {
-      isMobileSideBarShow: action.payload.isMobileSideBarShow
-    });
-  case RECEIVE_POST_LIST:
-    return Object.assign({}, state, {
-      posts: {
-        ids: payload.ids,
-        data: payload.data,
-        total: payload.total,
-        totalPages: payload.totalPages
-      }
-    });
-  default:
-    return state;
+    case TOGGLE_APP_SIDE_BAR:
+      return Object.assign({}, state, {
+        isMobileSideBarShow: action.payload.isMobileSideBarShow
+      });
+    case RECEIVE_POST_LIST:
+      return Object.assign({}, state, {
+        posts: {
+          ids: payload.ids,
+          data: payload.data,
+          total: payload.total,
+          totalPages: payload.totalPages
+        }
+      });
+    default:
+      return state;
   }
 }
 

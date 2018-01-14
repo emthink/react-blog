@@ -37,15 +37,15 @@ const initialState = {
 
 export default function articleReducer (state = initialState, action = {}) {
   switch (action.type) {
-  case SET_POST_ID:
-    return Object.assign({}, state, {
-      id: action.payload.id
-    });
-  case SET_POST_TOC:
-    return Object.assign({}, state, {
-      toc: action.payload.toc
-    });
-  default:
-    return state;
+    case SET_POST_ID:
+      return Object.assign({}, state, {
+        id: action.payload.id
+      });
+    case SET_POST_TOC:
+      return Object.assign({}, state, {
+        toc: action.payload.toc
+      });
+    default:
+      return state;
   }
 }

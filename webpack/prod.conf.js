@@ -2,13 +2,14 @@
  * [webpack生产环境配置文件]
  */
 
-const webpack = require('webpack')
-const webpackMerge = require('webpack-merge')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const ENV = process.env.NODE_ENV || 'production'
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ENV = process.env.NODE_ENV || 'production';
 
 // 拓展配置
 const options = {
+  publicPath: '//react.codingplayboy.com/',
   loaders: {
     styles: ExtractTextPlugin.extract({
       fallback: 'style-loader',
@@ -63,15 +64,15 @@ const options = {
     '__PROD__': ENV === 'production',
     '__TEST__': ENV === 'test'
   }
-}
+};
 
 module.exports = function (args) {
-  options.ROOTPATH = args.ROOTPATH
-  options.env = args.env
+  options.ROOTPATH = args.ROOTPATH;
+  options.env = args.env;
   return webpackMerge(require('./base.conf')(options), {
     plugins: [
       new webpack.DefinePlugin({
-        'process.env': 'production'
+        'process.env.NODE_ENV': 'production'
       }),
       // 生成独立css文件
       new ExtractTextPlugin({
@@ -83,5 +84,5 @@ module.exports = function (args) {
         }
       })
     ]
-  })
-}
+  });
+};

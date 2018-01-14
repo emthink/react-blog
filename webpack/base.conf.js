@@ -2,14 +2,14 @@
  * [webpack基础配置文件]
  */
 
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = function (options) {
-  const PUBLICPATH = options.publicPath || '/assets/'
-  const ROOTPATH = options.ROOTPATH
-  const entry = ['./app.js']
+  const PUBLICPATH = options.publicPath || '/assets/';
+  const ROOTPATH = options.ROOTPATH;
+  const entry = ['./app.js'];
   return {
     name: 'browser',
     context: path.resolve(ROOTPATH, 'src/'),
@@ -87,5 +87,5 @@ module.exports = function (options) {
     externals: {
       'highlight': 'hljs'
     }
-  }
-}
+  };
+};

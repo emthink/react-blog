@@ -7,8 +7,8 @@
     "doc": "./node_modules/.bin/documentation build src/app.js -f md > API.md",
     "lint": "eslint --cache --fix src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=dev yarn lint && yarn doc && webpack-dev-server --open",
-    "build": "cross-env NODE_ENV=production yarn lint && yarn doc && webpack"
+    "start": "cross-env NODE_ENV=dev yarn lint && yarn doc && webpack-dev-server --open --env dev",
+    "build": "cross-env NODE_ENV=production yarn lint && yarn doc && webpack --env production"
   },
   "keywords": [
     "react",

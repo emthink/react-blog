@@ -2,12 +2,12 @@
  * @desc webpack开发环境配置文件
  */
 
-const path = require('path')
-const webpack = require('webpack')
-const webpackMerge = require('webpack-merge')
-const PUBLICPATH = '/assets/'
-const PORT = '9090'
-const ENV = process.env.NODE_ENV || 'dev'
+const path = require('path');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const PUBLICPATH = '/assets/';
+const PORT = '9090';
+const ENV = process.env.NODE_ENV || 'dev';
 
 const options = {
   // publicPath: '/', // for `ip:port`, not need `ip:port/${output}`
@@ -34,11 +34,11 @@ const options = {
   beforePlugins: [
     new webpack.HotModuleReplacementPlugin()
   ]
-}
+};
 
 module.exports = function (args) {
-  options.ROOTPATH = args.ROOTPATH
-  options.env = args.env
+  options.ROOTPATH = args.ROOTPATH;
+  options.env = args.env;
   return webpackMerge(require('./base.conf')(options), {
     devtool: 'source-map',
     devServer: {
@@ -51,12 +51,12 @@ module.exports = function (args) {
       proxy: {
         '/': {
           bypass: function (req, res, proxyOptions) {
-            console.log('Skipping proxy for browser request.')
-            return `${PUBLICPATH}index.html`
+            console.log('Skipping proxy for browser request.');
+            return `${PUBLICPATH}index.html`;
           }
         }
       }
     },
     plugins: []
-  })
-}
+  });
+};
