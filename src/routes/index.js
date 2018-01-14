@@ -69,11 +69,15 @@ class Routes extends Component {
   componentDidMount () {
     const { pathname } = history.location;
     let results = pathname.match(/\/posts\/(\d+)\//) || [];
+    let pageRes = pathname.match(/\/page\/(\d+)\//) || [];
     let param = {};
 
     if (results[1]) {
       param.id = results[1];
       this.props.setPostId(results[1]);
+    }
+    if (pageRes[1]) {
+      param.page = pageRes[1];
     }
     this.props.requestPostList(param);
   }
@@ -91,7 +95,7 @@ class Routes extends Component {
               <Layout>
                 <Switch>
                   <Route exact path='/' component={Home} />
-                  <Route exact path='/page/:id/' component={Home} />
+                  <Route exact path='/page/:page/' component={Home} />
                   <Route exact path='/posts/:postId/' component={Article} />
                   <Route path='/about/' component={About} />
                   <Route path='/topics/' component={Topics} />

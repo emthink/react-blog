@@ -26,7 +26,7 @@ class Home extends Component {
     this.state = {
       posts: [],
       startPage: 1,
-      page: parseInt(this.props.match.params.id || 0, 10) || 1,
+      page: parseInt(this.props.page || 0, 10) || 1,
       pageSize: 10,
       totalPages: 0,
       total: 0
@@ -36,19 +36,26 @@ class Home extends Component {
     this.handlePageNext = this.handlePageNext.bind(this);
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    if (!this.props.willAutoFetchPosts) {
+      this.fetchPosts();
+    }
+  }
 
   componentWillUpdate (nextProps, nextState) {
-    const { page, pageSize } = this.state;
+    const { page } = this.props;
+    const { pageSize } = this.state;
 
-    if (nextState.page !== page || nextState.pageSize !== pageSize) {
-      this.fetchPosts(nextState);
+    if (nextProps.page !== page || nextState.pageSize !== pageSize) {
+      this.fetchPosts({
+        page: nextProps.page
+      });
     }
   }
 
   render () {
-    const { ids, posts, total, totalPages } = this.props;
-    const { page, pageSize, startPage } = this.state;
+    const { ids, page, posts, total, totalPages } = this.props;
+    const { pageSize, startPage } = this.state;
 
     return (
       <div>
@@ -66,39 +73,57 @@ class Home extends Component {
   }
 
   handlePageNext () {
-    this.props.push(`/page/${this.state.page + 1}/`);
-    this.setState((prevState) => {
-      return {
-        page: prevState.page + 1
-      };
+    const { page } = this.props;
+    this.props.push({
+      pathname: `/page/${page + 1}/`,
+      state: {
+        page: page + 1
+      }
     });
+  // this.setState((prevState) => {
+  //   return {
+  //     page: prevState.page + 1
+  //   }
+  // })
   }
 
   handlePageBack () {
-    const { page } = this.state;
+    const { page } = this.props;
     if (page === 2) {
-      this.props.push('/');
+      this.props.push({
+        pathname: '/',
+        state: {
+          id: 1
+        }
+      });
     } else {
-      this.props.push(`/page/${page - 1}/`);
+      this.props.push({
+        pathname: `/page/${page - 1}/`,
+        state: {
+          page: page - 1
+        }
+      });
     }
-    this.setState((prevState) => {
-      return {
-        page: prevState.page - 1
-      };
-    });
+  // this.setState((prevState) => {
+  //   return {
+  //     page: prevState.page - 1
+  //   }
+  // })
   }
 
   fetchPosts (data) {
-    const { page, pageSize } = data || this.state;
+    const { page } = data || this.props;
     this.props.requestPostList({
       page: page,
-      per_page: pageSize
+      per_page: this.state.pageSize
     });
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    willAutoFetchPosts: state.home.willAutoFetchPosts,
+    page: parseInt(ownProps.match.params.page || 1, 10),
     ids: state.app.posts.ids,
     posts: state.app.posts.data,
     total: state.app.posts.total,

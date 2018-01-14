@@ -8,6 +8,7 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { fetch, API } from 'api/';
 import { formatPostListData } from './dataAdapter';
+import { setWillAutoFetchPosts } from 'routes/Home/flux';
 
 const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar';
 const REQUEST_POST_LIST = 'REQUEST_POST_LIST';
@@ -136,6 +137,9 @@ function getPostList (params = {
 function * getPostListSaga ({ payload }) {
   const data = yield call(getPostList, payload);
   yield put(receivePostList(data));
+  if (data) {
+    yield put(setWillAutoFetchPosts(false));
+  }
 }
 
 /**

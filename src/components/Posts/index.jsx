@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import { Grid } from 'material-ui'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import { Grid } from 'material-ui';
 // import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList'
-import Subheader from 'material-ui/List/ListSubheader'
-import { CircularProgress } from 'material-ui/Progress'
-import Post from '../Post/'
+import Subheader from 'material-ui/List/ListSubheader';
+import { CircularProgress } from 'material-ui/Progress';
+import Post from '../Post/';
 
 const styles = theme => ({
   root: {
@@ -45,10 +45,10 @@ const styles = theme => ({
       maxWidth: 420
     }
   }
-})
+});
 
-function TitlebarGridList (props) {
-  const { classes, ids, posts } = props
+function Posts (props) {
+  const { classes, ids, posts } = props;
 
   const renderPosts = () => {
     if (ids && ids.length) {
@@ -56,11 +56,11 @@ function TitlebarGridList (props) {
         <Grid key={posts[id].id} item className={classes.postWrap}>
           <Post post={posts[id]} />
         </Grid>
-      ))
+      ));
     }
 
-    return <CircularProgress color='accent' />
-  }
+    return <CircularProgress color='accent' />;
+  };
 
   return (
     <div className={classes.root}>
@@ -80,11 +80,11 @@ function TitlebarGridList (props) {
         ))}
       </GridList> */}
     </div>
-  )
+  );
 }
 
-TitlebarGridList.propTypes = {
+Posts.propTypes = {
   classes: PropTypes.object.isRequired
-}
+};
 
-export default withStyles(styles)(TitlebarGridList)
+export default withStyles(styles)(Posts);
