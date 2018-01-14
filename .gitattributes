@@ -1,0 +1,7 @@
+* text=auto
+*.makedown linguist-language=JavaScript
+*.makefile linguist-language=JavaScript
+*.md linguist-language=JavaScript
+*.css linguist-language=JavaScript
+*.scss linguist-language=JavaScript
+*.jsx linguist-language=JavaScript
