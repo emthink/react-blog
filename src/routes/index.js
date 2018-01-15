@@ -6,6 +6,7 @@
  * @author codingplayboy
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import { withStyles } from 'material-ui/styles';
@@ -27,7 +28,9 @@ const Topics = AsyncComponent(() =>
   import(/* webpackChunkName: "topics" */ './Topics/')
 );
 const Article = AsyncComponent(() =>
-  import(/* webpackChunkName: "article" */ './Article/')
+  import(/* webpackChunkName: "article" */ './Article/'), {
+  key: 'article'
+}
 );
 
 const styles = theme => ({
@@ -66,6 +69,10 @@ const styles = theme => ({
  * @see src/routes/index.js
  */
 class Routes extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   componentDidMount () {
     const { pathname } = history.location;
     let results = pathname.match(/\/posts\/(\d+)\//) || [];

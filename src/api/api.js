@@ -11,5 +11,9 @@ export default {
   getPostList: {
     url: '/v2/posts',
     method: 'GET'
+  },
+  getPost: {
+    url: '/v2/posts/{id}',
+    method: 'GET'
   }
 };

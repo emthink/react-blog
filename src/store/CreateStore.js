@@ -32,18 +32,21 @@ export default (initialState = {}, reducers = {}, sagas = []) => {
     }
   }
 
+  let allReducers = {
+    router: routerReducer,
+    ...reducers
+  };
+
   // create store
   const store = createStore(
-    combineReducers({
-      router: routerReducer,
-      ...reducers
-    }),
+    combineReducers(allReducers),
     initialState,
     composeEnhancers(
       applyMiddleware(...middleware),
       ...enhancers
     )
   );
+  store.reducers = allReducers;
   store.asyncSagas = {};
   store.asyncReducers = {};
   store.runSaga = (saga) => {

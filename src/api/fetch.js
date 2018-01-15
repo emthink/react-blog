@@ -22,6 +22,14 @@ function fetch (option) {
       params.params = params.data;
       delete params.data;
     }
+    let slotParams = option.slotParams;
+    if (slotParams) {
+      for (let key in slotParams) {
+        if (slotParams.hasOwnProperty(key)) {
+          params.url = params.url.replace(`{${key}}`, slotParams[key]);
+        }
+      }
+    }
   }
   return axios(params).then(res => {
     if (res.data) {

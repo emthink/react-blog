@@ -11,9 +11,10 @@ import { combineReducers } from 'redux';
  * @param {object} asyncReducers reducers
  * @see src/store/OperateReducer.js
  */
-export const makeRootReducer = (reducers) => {
+export const makeRootReducer = (reducers, asyncReducers) => {
   return combineReducers({
-    ...reducers
+    ...reducers,
+    ...asyncReducers
   });
 };
 
@@ -30,7 +31,7 @@ export const injectReducer = (store, { key, reducer }) => {
   }
 
   store.asyncReducers[key] = reducer;
-  store.replaceReducer(makeRootReducer(store.asyncReducers));
+  store.replaceReducer(makeRootReducer(store.reducers, store.asyncReducers));
 };
 
 export default makeRootReducer;

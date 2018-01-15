@@ -28,6 +28,13 @@
         "SwitchCase": 1
       }
     ],
+    "comma-spacing": [
+      1,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
     "no-unused-vars": [
       1,
       {
