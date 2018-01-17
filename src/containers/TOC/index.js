@@ -19,7 +19,7 @@ class TOCContainer extends Component {
 
   componentWillUpdate (nextProps) {
     const { id, toc } = this.props;
-    if (nextProps.id !== id && toc && toc.length) {
+    if (+nextProps.id !== +id && toc && toc.length) {
       this.props.setPostToc([]);
     }
     this.init(true);
@@ -45,8 +45,8 @@ class TOCContainer extends Component {
 
   init (reset) {
     if (this.isArticlePage()) {
+      this.time = 0;
       if (reset) {
-        this.time = 0;
         clearInterval(this.timer);
       }
       this.timer = setInterval(() => {
@@ -95,12 +95,12 @@ class TOCContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { data = {} } = state.app.posts;
-  const id = state.article.id;
+  const id = parseInt(state.article.id || 0, 10) || '';
+  let data = (state.app.posts.data || {})[id] || state.article.post || {};
 
   return {
     id: id,
-    title: data[id] && data[id].title,
+    title: data.title,
     toc: state.article.toc
   };
 };

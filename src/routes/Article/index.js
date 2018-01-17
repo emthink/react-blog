@@ -31,21 +31,21 @@ class ArticleContainer extends Component {
 
   componentDidMount () {
     const { post, id } = this.props;
-    if (!post || !post.id || id !== post.id) {
+    if (!post || !post.id || +id !== +post.id) {
       this.props.requestPost({
         id: id
       });
     }
-    if (id && id !== post.id) {
-      this.props.setPostId(id);
+    if (id && post.id) {
+      this.props.setPostId(+id);
+      this.initArticleMeta();
     }
-    this.initArticleMeta();
   }
 
   componentWillReceiveProps (nextProps) {
     const { id } = nextProps.post || {};
-    if (id && id !== this.props.post.id) {
-      this.props.setPostId(id);
+    if (id && +id !== +this.props.post.id) {
+      this.props.setPostId(+id);
       this.initArticleMeta(nextProps.post);
     }
   }

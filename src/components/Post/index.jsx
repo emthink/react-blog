@@ -46,7 +46,7 @@ const styles = theme => ({
     backgroundColor: red[500]
   },
   title: {
-    fontSize: '1.1rem',
+    fontSize: '1.1rem'
   },
   flexGrow: {
     flex: '1 1 auto'
@@ -59,7 +59,7 @@ const styles = theme => ({
   }
 })
 
-class RecipeReviewCard extends Component {
+class Post extends Component {
   constructor (...arg) {
     super(...arg)
 
@@ -74,15 +74,23 @@ class RecipeReviewCard extends Component {
   }
 
   componentDidMount () {
-    if (this.props.post.id) {
-      this.getCategories();
+    const { categories = [] } = this.state.meta;
+    console.log(this.props.post.id, categories.length)
+    this._isMounted = true;
+    if (this.props.post.id && !categories.length) {
+      this.props.makeFetch(this.getCategories);
     }
   }
 
   componentWillReceiveProps (nextProps) {
+    console.log('willUpdate: ' + nextProps.post.id + ', ' + this.props.id)
     if (nextProps.post.id !== this.props.id) {
-      this.getCategories();
+      this.props.makeFetch(this.getCategories);
     }
+  }
+
+  componentWillUnMount () {
+    this._isMounted = false;
   }
 
   get postRoute () {
@@ -94,7 +102,7 @@ class RecipeReviewCard extends Component {
     const { categories } = this.state.meta
 
     return (
-      <div className={'post-wrap'}>
+      <div className={'post-wrap'} ref={el => { this.wrapEl = el; }}>
         <Card className={classes.card}>
           <CardHeader
             action={
@@ -156,16 +164,16 @@ class RecipeReviewCard extends Component {
     this.setState({ expanded: !this.state.expanded })
   }
 
-  getCategories () {
+  getCategories = () => {
     const { post } = this.props;
     if (post.categories && post.categories.length) {
-      fetch({
+      return fetch({
         ...API.getCategories,
         data: {
           include: post.categories.join(',')
         }
       }).then(res => {
-        if (res && res.data) {
+        if (res && res.data && this.wrapEl) {
           this.setState(prevState => ({
             meta: Object.assign({}, prevState.meta, {
               categories: res.data
@@ -177,8 +185,12 @@ class RecipeReviewCard extends Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
+Post.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(RecipeReviewCard)
+Post.defaultProps = {
+  makeFetch: (func) => func()
+}
+
+export default withStyles(styles)(Post)
