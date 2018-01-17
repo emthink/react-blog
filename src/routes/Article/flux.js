@@ -5,48 +5,48 @@
  * @copyright src/routes/Article/flux.js 2017/01/12
  * @author codingplayboy
  */
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest } from 'redux-saga/effects';
 import { fetch, API } from 'api/';
 import moment from 'moment';
 
-const SET_ARTICLE_POST_ID = 'SET_ARTICLE_POST_ID'
-const SET_ARTICLE_POST_TITLE = 'SET_ARTICLE_POST_Title'
-const SET_ARTICLE_POST_TOC = 'SET_ARTICLE_POST_TOC'
-const REQUEST_ARTICLE_POST = 'REQUEST_ARTICLE_POST'
-const RECEIVE_ARTICLE_POST = 'RECEIVE_ARTICLE_POST'
+const SET_ARTICLE_POST_ID = 'SET_ARTICLE_POST_ID';
+const SET_ARTICLE_POST_TITLE = 'SET_ARTICLE_POST_Title';
+const SET_ARTICLE_POST_TOC = 'SET_ARTICLE_POST_TOC';
+const REQUEST_ARTICLE_POST = 'REQUEST_ARTICLE_POST';
+const RECEIVE_ARTICLE_POST = 'RECEIVE_ARTICLE_POST';
 
 export const setPostId = (id) => ({
   type: SET_ARTICLE_POST_ID,
   payload: {
     id: id
   }
-})
+});
 
 export const setPostTitle = (title) => ({
   type: SET_ARTICLE_POST_TITLE,
   payload: {
     title: title
   }
-})
+});
 
 export const setPostToc = (toc) => ({
   type: SET_ARTICLE_POST_TOC,
   payload: {
     toc: toc
   }
-})
+});
 
 export const requestPost = (param) => ({
   type: REQUEST_ARTICLE_POST,
   payload: param
-})
+});
 
 export const receivePost = (param) => ({
   type: RECEIVE_ARTICLE_POST,
   payload: {
     post: param
   }
-})
+});
 
 const initialState = {
   id: '',
@@ -64,7 +64,7 @@ const initialState = {
     comment_status: '',
     status: ''
   }
-}
+};
 
 /**
  * Article Reducer
@@ -72,12 +72,12 @@ const initialState = {
  * @param {*} state store状态节点
  * @param {object} action action对象
  */
-export default function articleReducer (state = initialState , action = {}) {
+export default function articleReducer (state = initialState, action = {}) {
   switch (action.type) {
     case SET_ARTICLE_POST_ID:
       return Object.assign({}, state, {
         id: action.payload.id
-      })
+      });
     case SET_ARTICLE_POST_TOC:
       return Object.assign({}, state, {
         toc: action.payload.toc
@@ -135,7 +135,7 @@ function getPost (params = {}) {
  * @param {*} action.payload 请求参数负载
  */
 function * getPostSaga ({ payload }) {
-  const data = yield call(getPost, payload)
+  const data = yield call(getPost, payload);
   yield put(receivePost(data));
 }
 
@@ -145,5 +145,5 @@ function * getPostSaga ({ payload }) {
  */
 export function * ArticleSaga (action) {
   // 接收最近一次请求，然后调用getPostSaga子Saga
-  yield takeLatest(REQUEST_ARTICLE_POST, getPostSaga)
+  yield takeLatest(REQUEST_ARTICLE_POST, getPostSaga);
 }

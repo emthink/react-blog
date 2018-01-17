@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from 'material-ui/styles'
-// import classnames from 'classnames'
 import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card'
 import Collapse from 'material-ui/transitions/Collapse'
 import Avatar from 'material-ui/Avatar'
@@ -13,6 +12,8 @@ import FavoriteIcon from 'material-ui-icons/Favorite'
 import ShareIcon from 'material-ui-icons/Share'
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
+import { fetch, API } from 'api/'
+import 'styles/post.scss'
 
 const styles = theme => ({
   card: {
@@ -44,6 +45,9 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500]
   },
+  title: {
+    fontSize: '1.1rem',
+  },
   flexGrow: {
     flex: '1 1 auto'
   },
@@ -59,13 +63,26 @@ class RecipeReviewCard extends Component {
   constructor (...arg) {
     super(...arg)
 
-    this.state = { expanded: false }
+    this.state = {
+      expanded: false,
+      meta: {
+        categories: []
+      }
+    };
 
     this.handleExpandClick = this.handleExpandClick.bind(this)
   }
 
-  handleExpandClick () {
-    this.setState({ expanded: !this.state.expanded })
+  componentDidMount () {
+    if (this.props.post.id) {
+      this.getCategories();
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.post.id !== this.props.id) {
+      this.getCategories();
+    }
   }
 
   get postRoute () {
@@ -74,23 +91,19 @@ class RecipeReviewCard extends Component {
 
   render () {
     const { classes, post } = this.props
+    const { categories } = this.state.meta
 
     return (
-      <div>
+      <div className={'post-wrap'}>
         <Card className={classes.card}>
           <CardHeader
-            avatar={
-              <Avatar aria-label='Recipe' className={classes.avatar}>
-                X
-              </Avatar>
-            }
             action={
               <IconButton>
                 <MoreVertIcon />
               </IconButton>
             }
-            title={<Link to={this.postRoute}>{post.title}</Link>}
-            subheader={post.date}
+            title={<Link className={classes.title} to={this.postRoute}>{post.title}</Link>}
+            subheader={this.renderCategories(post.date, categories)}
           />
           {/* <CardMedia
             className={classes.media}
@@ -129,6 +142,38 @@ class RecipeReviewCard extends Component {
         </Card>
       </div>
     )
+  }
+
+  renderCategories (date = null, categories = []) {
+    return <p className={'categories-wrap'}>{ date }<span className={'category-label'}>分类于</span>
+      {categories.map((item, index) => {
+        return <span key={item.id}>{item.name}{ index !== categories.length - 1 && ', '}</span>;
+      })}
+    </p>;
+  }
+
+  handleExpandClick () {
+    this.setState({ expanded: !this.state.expanded })
+  }
+
+  getCategories () {
+    const { post } = this.props;
+    if (post.categories && post.categories.length) {
+      fetch({
+        ...API.getCategories,
+        data: {
+          include: post.categories.join(',')
+        }
+      }).then(res => {
+        if (res && res.data) {
+          this.setState(prevState => ({
+            meta: Object.assign({}, prevState.meta, {
+              categories: res.data
+            })
+          }));
+        }
+      });
+    }
   }
 }
 

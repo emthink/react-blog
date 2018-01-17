@@ -26,11 +26,16 @@ export const formatPostListData = (data) => {
       Object.assign(result.data, {
         [post.id]: {
           id: post.id,
+          authorId: parseInt(post.author || 0, 10) || '',
           title: post.title.rendered,
           date: moment(post.date).format('YYYY-MM-DD HH:mm:ss'),
           excerpt: post.excerpt.rendered,
           content: post.content.rendered,
-          modified: moment(post.modified).format('YYYY-MM-DD HH:mm:ss')
+          modified: moment(post.modified).format('YYYY-MM-DD HH:mm:ss'),
+          categories: post.categories,
+          tags: post.tags,
+          comment_status: post.comment_status,
+          status: post.status
         }
       });
     }

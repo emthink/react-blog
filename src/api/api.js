@@ -5,15 +5,27 @@
  * @author codingplayboy
  */
 
-export const APIBaseUrl = '//blog.codingplayboy.com/wp-json/wp';
+export const APIBaseUrl = '//blog.codingplayboy.com/wp-json/wp/v2';
 
 export default {
   getPostList: {
-    url: '/v2/posts',
+    url: '/posts',
     method: 'GET'
   },
   getPost: {
-    url: '/v2/posts/{id}',
+    url: '/posts/{id}',
+    method: 'GET'
+  },
+  getUser: {
+    url: '/users/{id}',
+    method: 'GET'
+  },
+  getCategories: {
+    url: '/categories',
+    method: 'GET'
+  },
+  getTags: {
+    url: '/tags',
     method: 'GET'
   }
 };

@@ -25,11 +25,18 @@
 -   [toggleMobileSideBar](#togglemobilesidebar)
 -   [requestPostList](#requestpostlist)
 -   [receivePostList](#receivepostlist)
+-   [appReducer](#appreducer)
+-   [getPostList](#getpostlist)
 -   [getPostListSaga](#getpostlistsaga)
 -   [AppSaga](#appsaga)
 -   [dataAdapter.js](#dataadapterjs)
 -   [formatPostListData](#formatpostlistdata)
 -   [flux.js](#fluxjs)
+-   [articleReducer](#articlereducer)
+-   [formatPostData](#formatpostdata)
+-   [getPostSaga](#getpostsaga)
+-   [ArticleSaga](#articlesaga)
+-   [SET_WILL_AUTO_FETCH_POSTS](#set_will_auto_fetch_posts)
 
 ## app.js
 
@@ -264,7 +271,7 @@ Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** [action] action object
 
-## 
+## appReducer
 
 -   **See: src/store/appFlux.js**
 
@@ -272,12 +279,12 @@ Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 **Parameters**
 
--   `state` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 应用状态树节点状态对象
+-   `state` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 应用状态树节点状态对象 (optional, default `initialState`)
 -   `action` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** action object
 
 Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** state 应用新状态对象
 
-## 
+## getPostList
 
 -   **See: src/store/appFlux.js**
 
@@ -289,7 +296,7 @@ Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
      eg: {
        page: Num,
        per_page: Num
-     }
+     } (optional, default `{page:1,per_page:10}`)
 
 ## getPostListSaga
 
@@ -341,5 +348,57 @@ Returns **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Gl
 **Meta**
 
 -   **copyright**: src/routes/Article/flux.js 2017/01/12
+
+-   **author**: codingplayboy
+
+## articleReducer
+
+-   **See: src/routes/Article/flux.js**
+
+Article Reducer
+
+**Parameters**
+
+-   `state` **any** store状态节点 (optional, default `initialState`)
+-   `action` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** action对象 (optional, default `{}`)
+
+## formatPostData
+
+-   **See: see src/routes/Article/flux.js**
+
+格式化文章信息DataAdapter
+
+**Parameters**
+
+-   `post` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** post文章信息对象 (optional, default `{}`)
+
+## getPostSaga
+
+-   **See: src/routes/Article/flux.js**
+
+处理请求文章列表Saga
+
+**Parameters**
+
+-   `$0` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `$0.payload`  
+
+## ArticleSaga
+
+-   **See: src/routes/Article/flux.js**
+
+定义ArticleSaga
+
+**Parameters**
+
+-   `action`  
+
+## SET_WILL_AUTO_FETCH_POSTS
+
+首页组件相关action, reducer, saga
+
+Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+**Meta**
 
 -   **author**: codingplayboy
