@@ -7,8 +7,9 @@
     }
     .article-toc-wrap {
         position: fixed;
-        bottom: 0;
-        padding: 0 0 20px;
+        bottom: 0px;
+        z-index: 100;
+        padding: 0 0 30px;
         .toc-header {
             background-color: $backgroundColor;
             .toc-header {

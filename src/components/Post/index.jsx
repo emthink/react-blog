@@ -75,22 +75,15 @@ class Post extends Component {
 
   componentDidMount () {
     const { categories = [] } = this.state.meta;
-    console.log(this.props.post.id, categories.length)
-    this._isMounted = true;
     if (this.props.post.id && !categories.length) {
       this.props.makeFetch(this.getCategories);
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('willUpdate: ' + nextProps.post.id + ', ' + this.props.id)
     if (nextProps.post.id !== this.props.id) {
       this.props.makeFetch(this.getCategories);
     }
-  }
-
-  componentWillUnMount () {
-    this._isMounted = false;
   }
 
   get postRoute () {

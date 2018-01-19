@@ -3,20 +3,21 @@
  * @author codingplayboy
  * @date 2017/12/23
  */
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { Toolbar, Hidden, Typography } from 'material-ui'
-import { FormControl } from 'material-ui/Form'
-import Input, { InputLabel } from 'material-ui/Input'
-import Drawer from 'material-ui/Drawer'
-import AppBar from 'material-ui/AppBar'
-import IconButton from 'material-ui/IconButton'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Toolbar, Hidden, Typography } from 'material-ui';
+import { FormControl } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
 import { Menu as MenuIcon, Close as CloseIcon,
-  ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon} from 'material-ui-icons'
-import { withStyles } from 'material-ui/styles'
+  ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon} from 'material-ui-icons';
+import { withStyles } from 'material-ui/styles';
+import PageBar from '../PageBar/';
 
-const drawerWidth = 240
+const drawerWidth = 240;
 
 const styles = (theme) => {
   return {
@@ -24,7 +25,9 @@ const styles = (theme) => {
       width: '100%'
     },
     flex: {
-      flex: 1
+      flex: 1,
+      textAlign: 'right',
+      paddingRight: 20
     },
     appBar: {
       boxShadow: '0px 0px 6px -1px rgba(0, 0, 0, 0.2)'
@@ -73,8 +76,8 @@ const styles = (theme) => {
         top: 64
       }
     }
-  }
-}
+  };
+};
 
 class BlogAppBar extends Component {
   constructor (...arg) {
@@ -82,14 +85,14 @@ class BlogAppBar extends Component {
 
     this.state = {
       isMobileSideBarShow: false
-    }
+    };
 
-    this.handleDrawerToggle = this.handleDrawerToggle.bind(this)
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
   }
 
   render () {
-    const { classes, theme, title } = this.props
-    const { isMobileSideBarShow } = this.state
+    const { classes, theme, title } = this.props;
+    const { isMobileSideBarShow } = this.state;
 
     return (
       <div className={classes.root}>
@@ -99,13 +102,12 @@ class BlogAppBar extends Component {
               aria-label='open Nav' onClick={this.handleDrawerToggle}>
               {isMobileSideBarShow ? <CloseIcon /> : <MenuIcon /> }
             </IconButton>
-            <Typography component={Link} to='/' type='title' color='inherit'>
+            <Typography className={'blog-title'} component={Link} to='/' type='title' color='inherit'>
               {title}
             </Typography>
             <div color='inherit' className={classes.flex}>
-              <Hidden mdDown implementation='css'>
-                {this.props.children}
-              </Hidden>
+              <PageBar />
+              {/* <Hidden mdDown implementation='css' /> */}
             </div>
             <FormControl className={classes.searchField}>
               <InputLabel
@@ -155,7 +157,7 @@ class BlogAppBar extends Component {
           </Drawer>
         </Hidden>
       </div>
-    )
+    );
   }
 
   handleDrawerToggle () {
@@ -164,14 +166,14 @@ class BlogAppBar extends Component {
     }), () => {
       this.props.toggleMobileSideBar({
         isMobileSideBarShow: this.state.isMobileSideBarShow
-      })
-    })
+      });
+    });
   }
 }
 
 BlogAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
-}
+};
 
-export default withStyles(styles, { withTheme: true })(BlogAppBar)
+export default withStyles(styles, { withTheme: true })(BlogAppBar);

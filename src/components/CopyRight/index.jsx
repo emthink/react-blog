@@ -3,9 +3,9 @@
  * @author codingplayboy
  * @date 2017/12/23
  */
-import React from 'react'
-import { withStyles } from 'material-ui/styles'
-import { Grid, Typography } from 'material-ui'
+import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import { Grid, Typography } from 'material-ui';
 
 const styles = theme => ({
   container: {
@@ -13,12 +13,16 @@ const styles = theme => ({
     position: 'absolute',
     top: '100%',
     left: 0,
+    zIndex: 200,
     padding: 20,
     paddingLeft: 0,
     paddingRight: 0,
     backgroundColor: theme.palette.grey[100],
     color: theme.palette.text.secondary,
-    borderTop: '1px solid #eeeeee'
+    borderTop: '1px solid #eeeeee',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: '44px'
+    }
   },
   item: {
     padding: '0 5px'
@@ -28,10 +32,10 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
     textDecoration: 'none'
   }
-})
+});
 
 const CopyRight = props => {
-  const { classes } = props
+  const { classes } = props;
   return (
     <Grid container justify='center' spacing={0} className={classes.container}>
       <Grid item className={classes.item}>
@@ -48,7 +52,7 @@ const CopyRight = props => {
         <a className={classes.text} href='http://github.com/codingplayboy'>Github: codingplayboy</a>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default withStyles(styles)(CopyRight)
+export default withStyles(styles)(CopyRight);

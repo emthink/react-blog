@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import BlogHeader from 'components/Header/';
 import RouterBar from 'components/RouterBar/';
 import CopyRight from 'components/CopyRight/';
+import PageBar from 'components/PageBar/';
 import Launch from 'components/Launch/';
 import Layout from 'containers/Layout/';
 import Home from './Home/';
@@ -40,25 +41,23 @@ const styles = theme => ({
     zIndex: 1,
     backgroundColor: theme.palette.background.default
   },
-  routerBar: {
-    marginTop: 56,
-    [theme.breakpoints.up('sm')]: {
-      marginTop: 64
-    }
-  },
   wrap: {
     padding: theme.spacing.unit * 1,
-    paddingTop: theme.spacing.unit * 1,
+    paddingTop: 0,
+    marginTop: 56,
     [theme.breakpoints.up('sm')]: {
+      marginTop: 64,
       padding: theme.spacing.unit * 2,
-      paddingTop: theme.spacing.unit * 1
+      paddingTop: 0
     },
     [theme.breakpoints.up('md')]: {
+      marginLeft: 60,
       padding: theme.spacing.unit * 3,
-      paddingTop: theme.spacing.unit * 1
+      paddingTop: 0
     }
   },
-  content: {}
+  content: {
+  }
 });
 
 /**
@@ -95,9 +94,9 @@ class Routes extends Component {
         <Launch className={classes.root}>
           <BlogHeader toggleMobileSideBar={toggleMobileSideBar} />
           <div className={classes.wrap}>
-            <RouterBar classes={{
+            {/* <RouterBar classes={{
               container: classes.routerBar
-            }} />
+            }} /> */}
             <div className={classes.content}>
               <Layout>
                 <Switch>

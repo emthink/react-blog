@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Button } from 'material-ui'
-import BlogAppBar from '../AppBar/'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'material-ui';
+import BlogAppBar from '../AppBar/';
 
 const BlogHeader = (props) => {
   return (
@@ -16,7 +16,7 @@ const BlogHeader = (props) => {
         Topics
       </Button>
     </BlogAppBar>
-  )
-}
+  );
+};
 
-export default BlogHeader
+export default BlogHeader;
