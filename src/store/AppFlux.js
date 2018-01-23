@@ -7,12 +7,14 @@
  */
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { fetch, API } from 'api/';
-import { formatPostListData } from './dataAdapter';
+import { formatPostListData, formatPostNavsData, formatCategoriesData } from './dataAdapter';
 import { setWillAutoFetchPosts } from 'routes/Home/flux';
 
 const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar';
 const REQUEST_POST_LIST = 'REQUEST_POST_LIST';
 const RECEIVE_POST_LIST = 'RECEIVE_POST_LIST';
+const REQUEST_CATEGORY_LIST = 'REQUEST_CATEGORY_LIST';
+const RECEIVE_CATEGORY_LIST = 'RECEIVE_CATEGORY_LIST';
 
 /**
  * 切换顶部／左部导航栏ActionCreator
@@ -53,8 +55,24 @@ function receivePostList (payload) {
   };
 }
 
+// 请求博客目录
+function requestCategories (param) {
+  return {
+    type: REQUEST_CATEGORY_LIST,
+    payload: param
+  };
+}
+
+// 接收博客目录
+function receiveCategories (param) {
+  return {
+    type: RECEIVE_CATEGORY_LIST,
+    payload: param
+  };
+}
+
 export const actions = {
-  toggleMobileSideBar, requestPostList, receivePostList
+  toggleMobileSideBar, requestPostList, receivePostList, requestCategories, receiveCategories
 };
 
 // 初始化状态
@@ -65,7 +83,9 @@ var initialState = {
     data: {},
     total: 0,
     totalPages: 0
-  }
+  },
+  categories: [],
+  postNavs: []
 };
 
 /**
@@ -90,6 +110,11 @@ export default function appReducer (state = initialState, action) {
           total: payload.total,
           totalPages: payload.totalPages
         }
+      });
+    case RECEIVE_CATEGORY_LIST:
+      return Object.assign({}, state, {
+        categories: formatCategoriesData(payload.categories),
+        postNavs: formatPostNavsData(payload.categories)
       });
     default:
       return state;
@@ -129,6 +154,18 @@ function getPostList (params = {
   });
 }
 
+// 请求目录列表方法
+function getCategories (params = {
+  per_page: 100
+}) {
+  return fetch({
+    ...API.getCategories,
+    data: params
+  }).then(res => {
+    return res.data || [];
+  });
+}
+
 /**
  * 处理请求文章列表Saga
  * @see src/store/appFlux.js
@@ -142,6 +179,13 @@ function * getPostListSaga ({ payload }) {
   }
 }
 
+function * getCategoriesSaga ({ payload }) {
+  const data = yield call(getCategories, payload);
+  yield put(receiveCategories({
+    categories: data
+  }));
+}
+
 /**
  * 定义AppSaga
  * @see src/store/appFlux.js
@@ -149,4 +193,5 @@ function * getPostListSaga ({ payload }) {
 export function * AppSaga (action) {
   // 接收最近一次请求，然后调用getPostListSaga子Saga
   yield takeLatest(REQUEST_POST_LIST, getPostListSaga);
+  yield takeLatest(REQUEST_CATEGORY_LIST, getCategoriesSaga);
 }

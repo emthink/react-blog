@@ -18,9 +18,17 @@ const styles = theme => ({
     paddingBottom: 20,
     background: theme.palette.background.paper
   },
+  splitLine: {
+    width: '100%',
+    height: 1,
+    position: 'relative',
+    top: -1,
+    marginBottom: 5,
+    borderBottom: '1px solid rgba(204, 204, 204, 0.6)'
+  },
   subHeader: {
-    marginBottom: 3,
-    color: theme.palette.common.darkBlack
+    color: theme.palette.common.darkBlack,
+    borderBottom: '1px solid #ff5e52'
   },
   container: {
     flexGrow: 1,
@@ -48,23 +56,35 @@ const styles = theme => ({
 });
 
 function Posts (props) {
-  const { classes, ids, posts } = props;
+  const { classes, ids, posts, categories } = props;
+
+  const getCategories = (categories, ids = []) => {
+    return ids.map(item => {
+      let category = categories[item];
+      return {
+        id: category.id,
+        name: category.name,
+        link: category.link
+      };
+    });
+  };
 
   const renderPosts = () => {
     if (ids && ids.length) {
       return ids.map(id => (
         <Grid key={posts[id].id} item className={classes.postWrap}>
-          <Post post={posts[id]} />
+          <Post categories={getCategories(categories, posts[id].categories)} post={posts[id]} />
         </Grid>
       ));
     }
 
-    return <CircularProgress color='accent' />;
+    return <CircularProgress color='secondary' />;
   };
 
   return (
     <div className={classes.root}>
-      <Subheader className={classes.subHeader} component='div'>文章列表</Subheader>
+      <Subheader className={classes.subHeader} component='div'>最新动态</Subheader>
+      <div className={classes.splitLine} />
       <Grid container className={classes.container}>
         <Grid item xs={12}>
           <Grid container justify='center' spacing={16}>

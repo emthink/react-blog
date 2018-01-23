@@ -18,9 +18,6 @@ const styles = theme => ({
     background: '#ffffff'
   },
   articleToc: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
   }
 });
 

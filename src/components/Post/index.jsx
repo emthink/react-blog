@@ -17,7 +17,9 @@ import 'styles/post.scss'
 
 const styles = theme => ({
   card: {
-    boxShadow: '0px 0px 8px 0px rgba(0, 0, 0, 0.2) inset'
+    boxShadow: 'unset',
+    borderBottom: '1px solid #eeeeee'
+    // boxShadow: '0px 0px 8px 0px rgba(0, 0, 0, 0.2) inset'
     // width: '100%',
     // paddingLeft: 10,
     // paddingRight: 10,
@@ -64,26 +66,10 @@ class Post extends Component {
     super(...arg)
 
     this.state = {
-      expanded: false,
-      meta: {
-        categories: []
-      }
+      expanded: false
     };
 
     this.handleExpandClick = this.handleExpandClick.bind(this)
-  }
-
-  componentDidMount () {
-    const { categories = [] } = this.state.meta;
-    if (this.props.post.id && !categories.length) {
-      this.props.makeFetch(this.getCategories);
-    }
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.post.id !== this.props.id) {
-      this.props.makeFetch(this.getCategories);
-    }
   }
 
   get postRoute () {
@@ -91,8 +77,7 @@ class Post extends Component {
   }
 
   render () {
-    const { classes, post } = this.props
-    const { categories } = this.state.meta
+    const { classes, post, categories } = this.props
 
     return (
       <div className={'post-wrap'} ref={el => { this.wrapEl = el; }}>
@@ -127,9 +112,7 @@ class Post extends Component {
             </IconButton>
             <div className={classes.flexGrow} />
             <IconButton
-              className={[classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              }]}
+              className={`classes.expand, ${this.state.expanded ? classes.expandOpen : ''}`}
               onClick={this.handleExpandClick}
               aria-expanded={this.state.expanded}
               aria-label='Show more'
@@ -156,26 +139,6 @@ class Post extends Component {
   handleExpandClick () {
     this.setState({ expanded: !this.state.expanded })
   }
-
-  getCategories = () => {
-    const { post } = this.props;
-    if (post.categories && post.categories.length) {
-      return fetch({
-        ...API.getCategories,
-        data: {
-          include: post.categories.join(',')
-        }
-      }).then(res => {
-        if (res && res.data && this.wrapEl) {
-          this.setState(prevState => ({
-            meta: Object.assign({}, prevState.meta, {
-              categories: res.data
-            })
-          }));
-        }
-      });
-    }
-  }
 }
 
 Post.propTypes = {
@@ -183,7 +146,7 @@ Post.propTypes = {
 }
 
 Post.defaultProps = {
-  makeFetch: (func) => func()
+  categories: []
 }
 
 export default withStyles(styles)(Post)

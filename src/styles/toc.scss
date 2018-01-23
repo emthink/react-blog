@@ -1,11 +1,13 @@
 @import './variable.scss';
 .article-toc {
+    display: none;
     width: 100%;
     ul,
     li {
         list-style: none;
     }
     .article-toc-wrap {
+        display: none;
         position: fixed;
         bottom: 0px;
         z-index: 100;
@@ -26,7 +28,19 @@
 
 #toc_container {
     display: none;
-    @media screen and (max-width: 959px) {
+}
+
+@media screen and (min-width: 960px) {
+    .article-toc {
+        display: block;
+        .article-toc-wrap {
+            display: block;
+        }
+    }
+}
+
+@media screen and (max-width: 959px) {
+    #toc_container {
         display: block;
     }
 }

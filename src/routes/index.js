@@ -12,10 +12,9 @@ import { ConnectedRouter } from 'react-router-redux';
 import { withStyles } from 'material-ui/styles';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import BlogHeader from 'components/Header/';
-import RouterBar from 'components/RouterBar/';
+import BlogHeader from 'containers/Header/';
+// import RouterBar from 'components/RouterBar/';
 import CopyRight from 'components/CopyRight/';
-import PageBar from 'components/PageBar/';
 import Launch from 'components/Launch/';
 import Layout from 'containers/Layout/';
 import Home from './Home/';
@@ -86,6 +85,7 @@ class Routes extends Component {
       param.page = pageRes[1];
     }
     this.props.requestPostList(param);
+    this.props.requestCategories();
   }
   render () {
     const { classes, toggleMobileSideBar } = this.props;
@@ -104,6 +104,7 @@ class Routes extends Component {
                   <Route exact path='/page/:page/' component={Home} />
                   <Route exact path='/posts/:postId/' component={Article} />
                   <Route path='/about/' component={About} />
+                  <Route path='/category/' component={About} />
                   <Route path='/topics/' component={Topics} />
                 </Switch>
               </Layout>
@@ -126,6 +127,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     toggleMobileSideBar: AppActions.toggleMobileSideBar,
     requestPostList: AppActions.requestPostList,
+    requestCategories: AppActions.requestCategories,
     setPostId: setPostId
   }, dispatch);
 };

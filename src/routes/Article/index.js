@@ -24,7 +24,6 @@ class ArticleContainer extends Component {
       author: {
         name: null
       },
-      categories: [],
       tags: []
     }
   }
@@ -51,16 +50,26 @@ class ArticleContainer extends Component {
   }
 
   render () {
-    const { post } = this.props;
+    const { post, categories } = this.props;
     return (
-      <Article post={post} meta={this.state.meta} />
+      <Article categories={this.getCategories(categories, post.categories)} post={post} meta={this.state.meta} />
     );
   }
+
+  getCategories = (categories, ids = []) => {
+    return ids.map(item => {
+      let category = categories[item];
+      return {
+        id: category.id,
+        name: category.name,
+        link: category.link
+      };
+    });
+  };
 
   initArticleMeta (data = {}) {
     const { post } = this.props;
     let authorId = data.authorId || post.authorId;
-    let categories = data.categories || post.categories || [];
     let tags = data.tags || post.tags || [];
 
     if (!authorId) {
@@ -80,22 +89,6 @@ class ArticleContainer extends Component {
         }));
       }
     });
-    if (categories.length) {
-      fetch({
-        ...API.getCategories,
-        data: {
-          include: categories.join(',')
-        }
-      }).then(res => {
-        if (res && res.data) {
-          this.setState(prevState => ({
-            meta: Object.assign({}, prevState.meta, {
-              categories: res.data
-            })
-          }));
-        }
-      });
-    }
     if (tags.length) {
       fetch({
         ...API.getTags,
@@ -122,7 +115,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     id: postId || '',
-    post: (ids.indexOf(postId) >= 0 && data[postId]) || state.article.post
+    post: (ids.indexOf(postId) >= 0 && data[postId]) || state.article.post,
+    categories: state.app.categories
   };
 };
 

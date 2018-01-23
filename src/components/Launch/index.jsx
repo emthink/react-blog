@@ -99,7 +99,7 @@ class Launch extends Component {
     }
     return (
       <div className={classes.wrap}>
-        <LinearProgress mode='buffer' value={complete} color='accent'
+        <LinearProgress mode='buffer' value={complete} color='secondary'
           valueBuffer={buffer} className={classes.progress} />
         <Avatar className={classes.avatar}>X</Avatar>
         <div className={classes.titleWrap}>

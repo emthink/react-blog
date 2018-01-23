@@ -59,7 +59,7 @@ class Article extends Component {
   }
 
   renderPost () {
-    const { classes, post, meta } = this.props;
+    const { classes, post, meta, categories } = this.props;
 
     const renderContent = () => {
       const { post } = this.props;
@@ -70,7 +70,7 @@ class Article extends Component {
     };
 
     if (!post || !post.title) {
-      return <CircularProgress color='accent' />;
+      return <CircularProgress color='secondary' />;
     }
 
     return (
@@ -84,7 +84,7 @@ class Article extends Component {
             </span>
           </div>
           {renderContent()}
-          <div className={'meta-categories'}><span><FolderOpen className={'category-icon'} />分类: </span>{this.renderCategoriesOrTags(meta.categories, true)}
+          <div className={'meta-categories'}><span><FolderOpen className={'category-icon'} />分类: </span>{this.renderCategoriesOrTags(categories, true)}
             <span className={'tag-label'}><LabelOutline className={'tag-icon'} />Tags: </span> {this.renderCategoriesOrTags(meta.tags)}
           </div>
         </div>

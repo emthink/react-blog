@@ -16,8 +16,9 @@ import { Menu as MenuIcon, Close as CloseIcon,
   ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon} from 'material-ui-icons';
 import { withStyles } from 'material-ui/styles';
 import PageBar from '../PageBar/';
+import PostNavBar from '../PostNavBar/';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const styles = (theme) => {
   return {
@@ -91,14 +92,14 @@ class BlogAppBar extends Component {
   }
 
   render () {
-    const { classes, theme, title } = this.props;
+    const { classes, theme, title, postNavs } = this.props;
     const { isMobileSideBarShow } = this.state;
 
     return (
       <div className={classes.root}>
         <AppBar position='fixed' color='primary' className={`${classes.appBar} header`}>
           <Toolbar>
-            <IconButton className={`${classes.navButton} base-text`} color='contrast'
+            <IconButton className={`${classes.navButton} base-text`}
               aria-label='open Nav' onClick={this.handleDrawerToggle}>
               {isMobileSideBarShow ? <CloseIcon /> : <MenuIcon /> }
             </IconButton>
@@ -107,7 +108,6 @@ class BlogAppBar extends Component {
             </Typography>
             <div color='inherit' className={classes.flex}>
               <PageBar />
-              {/* <Hidden mdDown implementation='css' /> */}
             </div>
             <FormControl className={classes.searchField}>
               <InputLabel
@@ -146,15 +146,17 @@ class BlogAppBar extends Component {
             ModalProps={{
               keepMounted: true // Better open performance on mobile.
             }}
-            className={classes.sideNavZIndex}
-          >
+            transitionDuration={100}>
             <div className={classes.drawerHeader}>
               <IconButton onClick={this.handleDrawerToggle}>
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
               </IconButton>
             </div>
-            {this.props.children}
+            <PostNavBar classes={'slide-nav'} key={'slide-post-navbar'} postNavs={postNavs} type={'slide'} />
           </Drawer>
+        </Hidden>
+        <Hidden only={['xs', 'sm']}>
+          <PostNavBar key={'post-navbar'} postNavs={postNavs} isShowMenuList={false} />
         </Hidden>
       </div>
     );
@@ -173,7 +175,8 @@ class BlogAppBar extends Component {
 
 BlogAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
+  postNavs: PropTypes.array
 };
 
 export default withStyles(styles, { withTheme: true })(BlogAppBar);

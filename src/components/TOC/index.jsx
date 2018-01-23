@@ -4,9 +4,9 @@
  * @copyright src/components/TOC/index.jsx
  * @author codingplayboy
  */
-import React, { Component } from 'react'
-import { List } from 'material-ui'
-import { withStyles } from 'material-ui/styles'
+import React, { Component } from 'react';
+import { List } from 'material-ui';
+import { withStyles } from 'material-ui/styles';
 import { ListItem, ListItemText } from 'material-ui/List';
 import ListSubheader from 'material-ui/List/ListSubheader';
 
@@ -33,24 +33,24 @@ const styles = theme => ({
     paddingBottom: 4,
     lineHeight: 1.6
   }
-})
+});
 
 class TOC extends Component {
   render () {
-    const { toc, classes } = this.props
+    const { toc, classes } = this.props;
 
     if (!toc || !toc.length) {
-      return null
+      return null;
     }
     return (
       <div className={`${classes.root} article-toc-wrap`}>
         {this.renderTOCList(toc)}
       </div>
-    )
+    );
   }
 
   renderTOCList (toc) {
-    const { classes, id } = this.props
+    const { classes, id } = this.props;
 
     if (!toc || !toc.length) {
       return null;
@@ -61,7 +61,7 @@ class TOC extends Component {
         return this.renderTOCList(item.children);
       }
       return <ListItemText primary={<a href={`#${item.id}`}>toc.textContent</a>} />;
-    }
+    };
 
     return <List className={classes.list}>
       {toc.map((item, index) => {
@@ -74,10 +74,10 @@ class TOC extends Component {
               {renderItem(item)}
             </ListItem>
           }
-        </div>
+        </div>;
       })}
     </List>;
   }
 }
 
-export default withStyles(styles)(TOC)
+export default withStyles(styles)(TOC);

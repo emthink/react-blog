@@ -27,6 +27,72 @@ $fontColor: rgba(51, 51, 51, 0.9);
     .article {
         line-height: 1.6;
     }
+    .post-navbar-wrap {
+        position: fixed;
+        width: 52px;
+        padding: 16px 4px;
+        left: 0;
+        top: 64px;
+        bottom: 0;
+        z-index: 300;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: #f4f4f4;
+        border-top: 1px solid #e5e5e5;
+        border-bottom: 1px solid rgba(229, 78, 83, 0.55);
+        .post-navbar-item {
+            flex: 1;
+            text-align: center;
+            max-height: 36px;
+            min-width: 30px;
+            margin: 12px 0;
+            span {
+                min-width: 36px;
+            }
+            .navbar-icon {
+                width: 40px;
+                height: 40px;
+                &.small {
+                    width: 34px;
+                    height: 34px;
+                }
+            }
+            &.active-link {
+                background-color: rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+    .post-slide-nav-wrap {
+        margin: 0;
+        padding: 0;
+        padding-bottom: 100px;
+        margin-left: 18px;
+        color: rgba(0, 0, 0, 0.87);
+        list-style: none;
+        .post-slide-nav-item {
+            .post-slide-nav-item-content {
+                text-align: left;
+                justify-content: flex-start;
+                margin-left: -16px;
+                text-transform: unset;
+                &.active-link {
+                    color: rgba(0, 0, 0, 0.87);
+                    background-color: rgba(0, 0, 0, 0.12);
+                }
+                .post-slide-nav-item {
+                    &.active-link {
+                        background-color: unset;
+                    }
+                }
+            }
+        }
+        .post-slide-nav-wrap {
+            padding-bottom: 0;
+            margin-left: 25px;
+            color: rgba(0, 0, 0, 0.54);
+        }
+    }
     .pagebar-wrap {
         .pagebar-item {
             &.active-link {
@@ -66,6 +132,31 @@ $fontColor: rgba(51, 51, 51, 0.9);
             .pagebar-item {
                 min-width: 50px;
             }
+        }
+    }
+}
+
+.menu-list-popover {
+    margin-left: 30px;
+    padding: 10px 0;
+    color: rgba(0, 0, 0, 0.54);
+    box-shadow: 0px 0px 3px 0px rgba(34, 34, 34, 0.1);
+    ul {
+        li:hover {
+            background-color: #ffffff;
+        }
+    }
+    a {
+        color: rgba(0, 0, 0, 0.54);
+    }
+    .active-link {
+        color: rgba(0, 0, 0, 0.87);
+    }
+    .post-navbar-menu-item {
+        padding-left: 35px;
+        padding-right: 35px;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.12);
         }
     }
 }

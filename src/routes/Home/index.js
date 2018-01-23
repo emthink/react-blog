@@ -54,12 +54,16 @@ class Home extends Component {
   }
 
   render () {
-    const { ids, page, posts, total, totalPages } = this.props;
+    const { ids, page, posts, total, totalPages, categories } = this.props;
     const { pageSize, startPage } = this.state;
 
     return (
       <div>
-        <Posts ids={ids} posts={posts} pageSize={pageSize} />
+        <Posts
+          categories={categories}
+          ids={ids}
+          posts={posts}
+          pageSize={pageSize} />
         <Pagination
           total={total}
           totalPages={totalPages}
@@ -127,7 +131,8 @@ const mapStateToProps = (state, ownProps) => {
     ids: state.app.posts.ids,
     posts: state.app.posts.data,
     total: state.app.posts.total,
-    totalPages: state.app.posts.totalPages
+    totalPages: state.app.posts.totalPages,
+    categories: state.app.categories
   };
 };
 
