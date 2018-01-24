@@ -74,7 +74,7 @@ module.exports = function (options) {
         alwaysWriteToDisk: true,
         template: path.resolve(ROOTPATH, 'src/index.html'),
         hash: false,
-        favicon: path.resolve(ROOTPATH, 'public/icon-live.png'),
+        favicon: path.resolve(ROOTPATH, 'public/favicon.ico'),
         filename: 'index.html',
         inject: 'body',
         minify: {

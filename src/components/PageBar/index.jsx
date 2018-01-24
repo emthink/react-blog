@@ -6,7 +6,13 @@
  */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Button } from 'material-ui';
+import { Button, Hidden, Menu } from 'material-ui';
+import IconButton from 'material-ui/IconButton'
+import { MenuItem } from 'material-ui/Menu';
+import MoreVertIcon from 'material-ui-icons/MoreVert';
+import MoreHorizIcon from 'material-ui-icons/MoreHoriz';
+import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
+import GithubIcon from 'styles/imgs/icons-github.png';
 
 const PageConfig = [
   {
@@ -29,18 +35,38 @@ const PageConfig = [
     link: '/about/'
   }
 ];
+const MorePageConfig = [{
+  label: '标签',
+  key: 'tag',
+  link: '/tag/'
+}, {
+  label: '资源',
+  key: 'resource',
+  link: '/resource/'
+}, {
+  label: '读书',
+  key: 'read',
+  link: '/read/'
+}, {
+  label: '',
+  key: 'github',
+  link: 'https://www.github.com/codingplayboy/',
+  icon: GithubIcon
+}];
 
 class PageBar extends Component {
   state = {
+    activeEle: null,
     activeNav: '',
     activeClass: 'active-link'
   }
 
   render () {
-    const { activeNav, activeClass } = this.state;
+    const { activeNav, activeClass, activeEle } = this.state;
+    const { pages, morePages } = this.props;
     return (
       <div className={'pagebar-wrap'}>
-        {this.props.pages.map(page => {
+        {pages.map(page => {
           return <Button key={page.key} exact={page.exact} color='inherit'
             activeClassName={activeClass} className={`pagebar-item ${activeNav === page.link ? 'active-link' : ''}`}
             component={NavLink} to={page.link}
@@ -48,6 +74,31 @@ class PageBar extends Component {
             {page.label}
           </Button>;
         })}
+        <Hidden only={['xs', 'sm']}>
+          <IconButton onClick={this.handleMorePageCLick}>
+            <MoreHorizIcon />
+          </IconButton>
+        </Hidden>
+        <Hidden mdUp>
+          <IconButton onClick={this.handleMorePageCLick}>
+            <MoreVertIcon />
+          </IconButton>
+          {/* <Button onClick={this.handleMorePageCLick} component={MoreVertIcon} /> */}
+        </Hidden>
+        <ClickAwayListener onClickAway={this.handleMorePageMenuClose}>
+          <Menu role='menu' anchorEl={activeEle} open={Boolean(activeEle)}
+            onClose={this.handleMorePageMenuClose}>
+            {morePages.map(page => {
+              return <MenuItem key={page.key} style={{justifyContent: 'center'}}>
+                <NavLink onClick={this.handleMorePageMenuClose}
+                  to={page.link}>
+                  {page.icon && <img className={`pagebar-icon ${page.class || ''}`} src={page.icon} />}
+                  {page.label || page.title}
+                </NavLink>
+              </MenuItem>;
+            })}
+          </Menu>
+        </ClickAwayListener>
       </div>
     );
   }
@@ -59,10 +110,24 @@ class PageBar extends Component {
       activeClass: ''
     }));
   }
+
+  handleMorePageCLick = (event) => {
+    let target = event.currentTarget;
+    this.setState(prevState => ({
+      activeEle: target
+    }));
+  }
+
+  handleMorePageMenuClose = () => {
+    this.setState(prevState => ({
+      activeEle: null
+    }));
+  }
 }
 
 PageBar.defaultProps = {
-  pages: PageConfig
+  pages: PageConfig,
+  morePages: MorePageConfig
 };
 
 export default PageBar;
