@@ -24,14 +24,15 @@ import AsyncComponent from 'helper/AsyncComponent';
 import { actions as AppActions } from 'store/appFlux';
 import { setPostId } from './Article/flux';
 
-const Topics = AsyncComponent(() =>
-  import(/* webpackChunkName: "topics" */ './Topics/')
-);
 const Article = AsyncComponent(() =>
   import(/* webpackChunkName: "article" */ './Article/'), {
   key: 'article'
-}
-);
+});
+
+const Category = AsyncComponent(() =>
+  import(/* webpackChunkName: "category" */ './Category/'), {
+  key: 'category'
+});
 
 const styles = theme => ({
   root: {
@@ -104,8 +105,7 @@ class Routes extends Component {
                   <Route exact path='/page/:page/' component={Home} />
                   <Route exact path='/posts/:postId/' component={Article} />
                   <Route path='/about/' component={About} />
-                  <Route path='/category/' component={About} />
-                  <Route path='/topics/' component={Topics} />
+                  <Route path='/category/' component={Category} />
                 </Switch>
               </Layout>
             </div>

@@ -7,7 +7,7 @@
  */
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { fetch, API } from 'api/';
-import { formatPostListData, formatPostNavsData, formatCategoriesData } from './dataAdapter';
+import { formatPostListData, formatPostNavsData, formatCategoriesData, formatCategoryListData } from './dataAdapter';
 import { setWillAutoFetchPosts } from 'routes/Home/flux';
 
 const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar';
@@ -112,8 +112,13 @@ export default function appReducer (state = initialState, action) {
         }
       });
     case RECEIVE_CATEGORY_LIST:
+      let data = formatCategoryListData(payload.categories);
+      let categories = formatCategoriesData(payload.categories);
       return Object.assign({}, state, {
-        categories: formatCategoriesData(payload.categories),
+        categories: categories.idMap,
+        categorySlugMap: categories.slugMap,
+        categoryList: data.list,
+        categoryIndexes: data.indexObj,
         postNavs: formatPostNavsData(payload.categories)
       });
     default:

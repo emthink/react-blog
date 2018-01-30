@@ -56,7 +56,7 @@ const styles = theme => ({
 });
 
 function Posts (props) {
-  const { classes, ids, posts, categories } = props;
+  const { classes, ids, posts, categories, subHeaderTitle } = props;
 
   const getCategories = (categories, ids = []) => {
     return ids.map(item => {
@@ -83,7 +83,7 @@ function Posts (props) {
 
   return (
     <div className={classes.root}>
-      <Subheader className={classes.subHeader} component='div'>最新动态</Subheader>
+      <Subheader className={classes.subHeader} component='div'>{subHeaderTitle}</Subheader>
       <div className={classes.splitLine} />
       <Grid container className={classes.container}>
         <Grid item xs={12}>
@@ -104,7 +104,12 @@ function Posts (props) {
 }
 
 Posts.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  subHeaderTitle: PropTypes.string
+};
+
+Posts.defaultProps = {
+  subHeaderTitle: '最新动态'
 };
 
 export default withStyles(styles)(Posts);

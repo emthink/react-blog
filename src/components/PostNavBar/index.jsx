@@ -16,6 +16,10 @@ class PostNavBar extends Component {
     menu: []
   };
 
+  componentDidMount () {
+    this.initPosition();
+  }
+
   componentWillUnmount () {
     document.removeEventListener('click', this.handleMenuClose);
   }
@@ -132,6 +136,17 @@ class PostNavBar extends Component {
       activeNav: activeNav,
       activeClass: ''
     }));
+  }
+
+  initPosition () {
+    let activeLink = document.querySelector('.post-navbar-wrap a.active-link');
+    if (activeLink) {
+      let itemHeight = activeLink.clientHeight;
+      let offsetTop = activeLink.offsetTop;
+      let list = document.querySelector('.post-navbar-wrap');
+      let clientHeight = list.clientHeight;
+      list.scrollTo(offsetTop - clientHeight + itemHeight, 0);
+    }
   }
 }
 

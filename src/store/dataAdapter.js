@@ -44,17 +44,22 @@ export const formatPostListData = (data) => {
         }
       });
     }
-    return result;
   }
+  return result;
 };
 
 // 适配目录数组数据为Object
 export const formatCategoriesData = (data = []) => {
   let results = {};
+  let slugs = {};
   data.map((cur) => {
     results[cur.id] = cur;
+    slugs[cur.slug] = cur;
   });
-  return results;
+  return {
+    idMap: results,
+    slugMap: slugs
+  };
 };
 
 // postNavs排序索引
@@ -63,10 +68,11 @@ const PostNavsIndexObj = {
   'html': 1,
   'css': 2,
   'js': 3,
-  'spa': 4,
   'mobile': 5,
+  'spa': 4,
+  'pack': 7,
   'gitsvn': 6,
-  'linux': 7
+  'linux': 8
 };
 const PostNavsInfo = {
   'html': {
@@ -92,10 +98,14 @@ const PostNavsInfo = {
   spa: {
     label: 'SPA',
     'label-title': true
+  },
+  pack: {
+    label: 'Pack',
+    'label-title': true
   }
 };
 // postNavs白名单
-const PostNavsWhiteList = ['web', 'html', 'css', 'js', 'mobile', 'gitsvn', 'spa', 'linux', 'sundry'];
+const PostNavsWhiteList = ['web', 'html', 'css', 'js', 'mobile', 'pack', 'gitsvn', 'spa', 'linux', 'sundry'];
 const PostNavsBlackList = [];
 
 // 适配PostNavs
@@ -140,4 +150,51 @@ export const formatPostNavsData = (data = []) => {
     }
   });
   return results;
+};
+
+const CategoryListBlacklist = ['uncategorized'];
+
+// 适配分类列表展示数据
+export const formatCategoryListData = (data = []) => {
+  let results = [];
+  let indexObj = {};
+  data.map((cur) => {
+    if (cur && cur.name && !cur.parent &&
+      CategoryListBlacklist.indexOf(cur.slug) < 0) {
+      let len = results.length;
+      indexObj[cur.id] = [len];
+      results.push(Object.assign({
+        id: cur.id,
+        index: len,
+        label: cur.name,
+        title: cur.name,
+        key: cur.slug || cur.id,
+        link: cur.link.replace(/.+\.(?:com|net|cn|org)(\/.+\/?$)/, '$1')
+      }));
+    }
+  });
+  data.map(item => {
+    if (item && item.parent && CategoryListBlacklist.indexOf(item.slug) < 0) {
+      let parentIndex = indexObj[item.parent];
+      if (typeof parentIndex !== 'undefined') {
+        parentIndex = parentIndex[0];
+        let len = (results[parseInt(parentIndex, 10)].children || []).length;
+        indexObj[item.id] = [parentIndex, len];
+        results[parseInt(parentIndex, 10)].children = (results[parseInt(parentIndex, 10)].children || []).concat({
+          id: item.id,
+          label: item.name,
+          title: item.name,
+          parent: item.parent,
+          index: len,
+          parentIndex: parentIndex,
+          key: item.slug || item.id,
+          link: item.link.replace(/.+\.(?:com|net|cn|org)(\/.+\/?$)/, '$1')
+        });
+      }
+    }
+  });
+  return {
+    list: results,
+    indexObj: indexObj
+  };
 };

@@ -108,11 +108,6 @@ class Home extends Component {
         }
       });
     }
-  // this.setState((prevState) => {
-  //   return {
-  //     page: prevState.page - 1
-  //   }
-  // })
   }
 
   fetchPosts (data) {

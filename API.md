@@ -21,13 +21,16 @@
 -   [React](#react)
 -   [Article/index.js](#articleindexjs)
 -   [ArticleContainer](#articlecontainer)
+-   [Component](#component)
 -   [AppFlux.js](#appfluxjs)
 -   [toggleMobileSideBar](#togglemobilesidebar)
 -   [requestPostList](#requestpostlist)
 -   [receivePostList](#receivepostlist)
 -   [appReducer](#appreducer)
 -   [getPostList](#getpostlist)
+-   [getPostList](#getpostlist-1)
 -   [getPostListSaga](#getpostlistsaga)
+-   [getPostListSaga](#getpostlistsaga-1)
 -   [AppSaga](#appsaga)
 -   [dataAdapter.js](#dataadapterjs)
 -   [formatPostListData](#formatpostlistdata)
@@ -37,6 +40,8 @@
 -   [getPostSaga](#getpostsaga)
 -   [ArticleSaga](#articlesaga)
 -   [SET_WILL_AUTO_FETCH_POSTS](#set_will_auto_fetch_posts)
+-   [takeLatest](#takelatest)
+-   [CategoryListSaga](#categorylistsaga)
 
 ## app.js
 
@@ -225,6 +230,16 @@ fork所有saga分支
 
 文章正文容器组件
 
+## Component
+
+-   **See: src/routes/Category/index.js**
+
+分类页面
+
+**Meta**
+
+-   **author**: codingplayboy
+
 ## AppFlux.js
 
 应用初始化时期望处理的异步请求管理Sagas模块
@@ -298,6 +313,14 @@ Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
        per_page: Num
      } (optional, default `{page:1,per_page:10}`)
 
+## getPostList
+
+fetch请求分类文章列表
+
+**Parameters**
+
+-   `params` **any** 
+
 ## getPostListSaga
 
 -   **See: src/store/appFlux.js**
@@ -308,6 +331,17 @@ Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 -   `payload` **any** 请求参数负载
     -   `payload.payload`  
+
+## getPostListSaga
+
+-   **See: src/containers/CategoryList/flux.js**
+
+定义请求分类文章列表Saga
+
+**Parameters**
+
+-   `param` **any** 
+    -   `param.payload`  
 
 ## AppSaga
 
@@ -402,3 +436,23 @@ Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 **Meta**
 
 -   **author**: codingplayboy
+
+## takeLatest
+
+-   **See: src/routes/Category/flux.js**
+
+分类模块flux
+
+**Meta**
+
+-   **author**: codingplayboy
+
+## CategoryListSaga
+
+-   **See: src/store/appFlux.js**
+
+定义TagListSaga
+
+**Parameters**
+
+-   `action`  

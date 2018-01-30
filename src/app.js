@@ -17,14 +17,16 @@ import Routes from './routes/';
 import appReducer, { AppSaga } from './store/AppFlux';
 import articleReducer from './routes/Article/flux';
 import homeReducer from './routes/Home/flux';
+import CategoryListReducer, { CategoryListSaga } from './containers/CategoryList/flux';
 
-const rootSaga = makeRootSaga([AppSaga]);
+const rootSaga = makeRootSaga([AppSaga, CategoryListSaga]);
 
 // 调用createStore方法创建store
 const store = createStore({}, {
   app: appReducer,
   home: homeReducer,
-  article: articleReducer
+  article: articleReducer,
+  categoryList: CategoryListReducer
 }, rootSaga);
 
 const style = {
