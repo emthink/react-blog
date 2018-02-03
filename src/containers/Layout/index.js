@@ -5,6 +5,7 @@
  * @author codingplayboy
  */
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import { Grid } from 'material-ui';
 import TOC from 'containers/TOC/';
@@ -27,7 +28,7 @@ const styles = theme => ({
  * @param {*} props
  */
 function Layout (props) {
-  const { classes } = props;
+  const { classes, isArticlePage, location } = props;
   return (
     <Grid container spacing={24} className={classes.root}>
       <Grid
@@ -47,11 +48,11 @@ function Layout (props) {
         md={3}>
         暂时未开放，敬请期待
         <div className={`${classes.articleToc} article-toc`}>
-          <TOC />
+          {isArticlePage(location.pathname) && <TOC isArticlePage={isArticlePage(location.pathname)} />}
         </div>
       </Grid>
     </Grid>
   );
 }
 
-export default withStyles(styles)(Layout);
+export default withRouter(withStyles(styles)(Layout));

@@ -80,7 +80,7 @@ class Article extends Component {
           <div className={'article-meta-wrap'}>
             <span className={'article-meta-container'}>
               作者：<span className={'meta-author'}>{meta.author.name}</span>
-              <span className={'meta-date'}>{post.date}著</span>
+              <span className={'meta-date'}>{post.date} 著</span>
             </span>
           </div>
           {renderContent()}

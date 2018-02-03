@@ -10,6 +10,7 @@ import { fetch, API } from 'api/';
 import moment from 'moment';
 
 const SET_ARTICLE_POST_ID = 'SET_ARTICLE_POST_ID';
+const SET_ARTICLE_LINK = 'SET_ARTICLE_LINK';
 const SET_ARTICLE_POST_TITLE = 'SET_ARTICLE_POST_Title';
 const SET_ARTICLE_POST_TOC = 'SET_ARTICLE_POST_TOC';
 const REQUEST_ARTICLE_POST = 'REQUEST_ARTICLE_POST';
@@ -19,6 +20,13 @@ export const setPostId = (id) => ({
   type: SET_ARTICLE_POST_ID,
   payload: {
     id: id
+  }
+});
+
+export const setPostLink = (link) => ({
+  type: SET_ARTICLE_LINK,
+  payload: {
+    link: link
   }
 });
 
@@ -50,6 +58,7 @@ export const receivePost = (param) => ({
 
 const initialState = {
   id: '',
+  link: '',
   toc: [],
   post: {
     id: '',
@@ -62,7 +71,8 @@ const initialState = {
     categories: [],
     tags: [],
     comment_status: '',
-    status: ''
+    status: '',
+    link: ''
   }
 };
 
@@ -77,6 +87,10 @@ export default function articleReducer (state = initialState, action = {}) {
     case SET_ARTICLE_POST_ID:
       return Object.assign({}, state, {
         id: action.payload.id
+      });
+    case SET_ARTICLE_LINK:
+      return Object.assign({}, state, {
+        link: action.payload.link
       });
     case SET_ARTICLE_POST_TOC:
       return Object.assign({}, state, {
@@ -111,17 +125,28 @@ function formatPostData (post = {}) {
     categories: post.categories,
     tags: post.tags,
     comment_status: post.comment_status,
-    status: post.status
+    status: post.status,
+    link: post.link
   };
 }
 
 function getPost (params = {}) {
-  return fetch({
-    ...API.getPost,
-    slotParams: {
-      ...params
-    }
-  }).then(res => {
+  let options = {};
+
+  if (params.id) {
+    options = {
+      ...API.getPostById,
+      slotParams: {
+        ...params
+      }
+    };
+  } else {
+    options = {
+      ...API.getPost,
+      data: params
+    };
+  }
+  return fetch(options).then(res => {
     if (res && res.data) {
       return formatPostData(res.data);
     }

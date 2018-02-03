@@ -12,6 +12,7 @@ import { setWillAutoFetchPosts } from 'routes/Home/flux';
 
 const TOGGLE_APP_SIDE_BAR = 'toggle_app_side_bar';
 const REQUEST_POST_LIST = 'REQUEST_POST_LIST';
+const FETCHING_POST_LIST = 'FETCHING_POST_LIST';
 const RECEIVE_POST_LIST = 'RECEIVE_POST_LIST';
 const REQUEST_CATEGORY_LIST = 'REQUEST_CATEGORY_LIST';
 const RECEIVE_CATEGORY_LIST = 'RECEIVE_CATEGORY_LIST';
@@ -38,6 +39,19 @@ function toggleMobileSideBar (payload = {}) {
 function requestPostList (payload) {
   return {
     type: REQUEST_POST_LIST,
+    payload: payload
+  };
+}
+
+/**
+ * 请求文章列表状态中ActionCreator
+ * @param {object} payload 请求状态
+ * @return {object} [action] action object
+ * @see src/store/AppFlux.js
+ */
+function fetchingPostList (payload) {
+  return {
+    type: FETCHING_POST_LIST,
     payload: payload
   };
 }
@@ -78,6 +92,7 @@ export const actions = {
 // 初始化状态
 var initialState = {
   isMobileSideBarShow: false,
+  fetching: false,
   posts: {
     ids: [],
     data: {},
@@ -85,6 +100,9 @@ var initialState = {
     totalPages: 0
   },
   categories: [],
+  categorySlugMap: {},
+  categoryList: [],
+  categoryIndexes: {},
   postNavs: []
 };
 
@@ -101,6 +119,10 @@ export default function appReducer (state = initialState, action) {
     case TOGGLE_APP_SIDE_BAR:
       return Object.assign({}, state, {
         isMobileSideBarShow: action.payload.isMobileSideBarShow
+      });
+    case FETCHING_POST_LIST:
+      return Object.assign({}, state, {
+        fetching: action.payload.fetching
       });
     case RECEIVE_POST_LIST:
       return Object.assign({}, state, {
@@ -177,8 +199,14 @@ function getCategories (params = {
  * @param {*} payload 请求参数负载
  */
 function * getPostListSaga ({ payload }) {
+  yield put(fetchingPostList({
+    fetching: true
+  }));
   const data = yield call(getPostList, payload);
   yield put(receivePostList(data));
+  yield put(fetchingPostList({
+    fetching: false
+  }));
   if (data) {
     yield put(setWillAutoFetchPosts(false));
   }

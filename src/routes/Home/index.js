@@ -54,13 +54,14 @@ class Home extends Component {
   }
 
   render () {
-    const { ids, page, posts, total, totalPages, categories } = this.props;
+    const { fetching, ids, page, posts, total, totalPages, categories } = this.props;
     const { pageSize, startPage } = this.state;
 
     return (
       <div>
         <Posts
           categories={categories}
+          fetching={fetching}
           ids={ids}
           posts={posts}
           pageSize={pageSize} />
@@ -123,6 +124,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     willAutoFetchPosts: state.home.willAutoFetchPosts,
     page: parseInt(ownProps.match.params.page || 1, 10),
+    fetching: state.app.fetching,
     ids: state.app.posts.ids,
     posts: state.app.posts.data,
     total: state.app.posts.total,

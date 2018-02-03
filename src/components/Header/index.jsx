@@ -65,7 +65,7 @@ import BlogAppBar from '../AppBar/';
 
 const BlogHeader = (props) => {
   return (
-    <BlogAppBar title={'号外'} postNavs={props.postNavs} toggleMobileSideBar={props.toggleMobileSideBar}>
+    <BlogAppBar title={'学而后知'} postNavs={props.postNavs} toggleMobileSideBar={props.toggleMobileSideBar}>
       <Button color='inherit' component={Link} to='/'>
         Home
       </Button>

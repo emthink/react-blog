@@ -56,7 +56,7 @@ const styles = theme => ({
 });
 
 function Posts (props) {
-  const { classes, ids, posts, categories, subHeaderTitle } = props;
+  const { classes, fetching, ids, posts, categories, subHeaderTitle } = props;
 
   const getCategories = (categories, ids = []) => {
     return ids.map(item => {
@@ -70,6 +70,10 @@ function Posts (props) {
   };
 
   const renderPosts = () => {
+    if (fetching) {
+      return <CircularProgress color='secondary' />;
+    }
+
     if (ids && ids.length) {
       return ids.map(id => (
         <Grid key={posts[id].id} item className={classes.postWrap}>
@@ -77,8 +81,6 @@ function Posts (props) {
         </Grid>
       ));
     }
-
-    return <CircularProgress color='secondary' />;
   };
 
   return (

@@ -24,6 +24,12 @@ import AsyncComponent from 'helper/AsyncComponent';
 import { actions as AppActions } from 'store/appFlux';
 import { setPostId } from './Article/flux';
 
+export const isArticlePage = (path) => {
+  const results = path.match(/\/posts\/(\d+)\/?$/) || [];
+  const results2 = path.match(/\/\d{4}\/\d{1,2}\/(\d+)\/.+\/?$/) || [];
+  return !!results[1] || !!results2[1];
+};
+
 const Article = AsyncComponent(() =>
   import(/* webpackChunkName: "article" */ './Article/'), {
   key: 'article'
@@ -99,11 +105,12 @@ class Routes extends Component {
               container: classes.routerBar
             }} /> */}
             <div className={classes.content}>
-              <Layout>
+              <Layout isArticlePage={isArticlePage}>
                 <Switch>
                   <Route exact path='/' component={Home} />
                   <Route exact path='/page/:page/' component={Home} />
                   <Route exact path='/posts/:postId/' component={Article} />
+                  <Route exact path='/:aYear(\d{4})/:aMonth(\d{1,2})/:aDay(\d{1,2})/:aSlug/' component={Article} />
                   <Route path='/about/' component={About} />
                   <Route path='/category/' component={Category} />
                 </Switch>

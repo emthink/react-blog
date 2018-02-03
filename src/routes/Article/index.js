@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { fetch, API } from 'api/';
 import 'styles/article.scss';
 import Article from 'components/Article/';
@@ -29,21 +30,34 @@ class ArticleContainer extends Component {
   }
 
   componentDidMount () {
-    const { post, id } = this.props;
-    if (!post || !post.id || +id !== +post.id) {
-      this.props.requestPost({
-        id: id
-      });
+    const { post, id, link } = this.props;
+
+    if (!post || !post.id || +id !== +post.id || link !== post.link) {
+      if (id) {
+        this.props.requestPost({
+          id: id
+        });
+      } else {
+        const { aYear, aMonth, aDay, aSlug } = this.props.match.params;
+        let dateString = `${aYear}/${aMonth}/${aDay}`;
+        this.props.requestPost({
+          slug: aSlug,
+          before: moment(dateString).endOf('day').format('YYYY-MM-DDTHH:mm:ss'),
+          after: moment(dateString).startOf('day').format('YYYY-MM-DDTHH:mm:ss')
+        });
+      }
     }
-    if (id && post.id) {
-      this.props.setPostId(+id);
+    if ((id || link) && post.id) {
+      this.props.setPostId(+(id || post.id));
       this.initArticleMeta();
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    const { id } = nextProps.post || {};
-    if (id && +id !== +this.props.post.id) {
+    const { post } = this.props;
+    const { id, link } = nextProps.post || {};
+    if ((id && +id !== +post.id) ||
+      (link && link !== post.link)) {
       this.props.setPostId(+id);
       this.initArticleMeta(nextProps.post);
     }
@@ -110,12 +124,14 @@ class ArticleContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { ids = [], data } = state.app.posts;
-  let { postId } = ownProps.match.params;
+  let { aYear, aMonth, aDay, aSlug, postId } = ownProps.match.params;
   postId = parseInt(postId || 0, 10);
+  let link = ['', aYear, aMonth, aDay, aSlug, ''].join('/');
 
   return {
     id: postId || '',
-    post: (ids.indexOf(postId) >= 0 && data[postId]) || state.article.post,
+    link: link,
+    post: (ids.indexOf(postId) >= 0 && data[postId]) || data[link] || state.article.post,
     categories: state.app.categories
   };
 };

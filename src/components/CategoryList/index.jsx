@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { CircularProgress } from 'material-ui/Progress';
 
 class CategoryList extends Component {
   render () {
@@ -12,7 +13,13 @@ class CategoryList extends Component {
   }
 
   renderPostList () {
-    const { ids, posts } = this.props;
+    const { ids, posts, fetching } = this.props;
+
+    if (fetching) {
+      return <div className={'load-progress-wrap'}>
+        <CircularProgress color='secondary' />
+      </div>;
+    }
 
     return ids.map(id => {
       let post = posts[id];

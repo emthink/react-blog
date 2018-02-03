@@ -320,6 +320,7 @@ fetch请求分类文章列表
 **Parameters**
 
 -   `params` **any** 
+    -   `params.data`  
 
 ## getPostListSaga
 

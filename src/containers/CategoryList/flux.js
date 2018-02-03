@@ -12,6 +12,7 @@ import { formatPostListData } from 'store/dataAdapter';
 
 const TYPES = keyMirror({
   REQUEST_POST_LIST: null,
+  FETCHING_POST_LIST: null,
   RECEIVE_POST_LIST: null
 }, 'CATEGORY');
 
@@ -19,12 +20,16 @@ export const actions = createActions({
   requestPostList: {
     type: TYPES.REQUEST_POST_LIST
   },
+  fetchingPostList: {
+    type: TYPES.FETCHING_POST_LIST
+  },
   receivePostList: {
     type: TYPES.RECEIVE_POST_LIST
   }
 });
 
 const initialState = {
+  fetching: false,
   ids: [],
   posts: []
 };
@@ -36,6 +41,10 @@ export default function categoryReducer (state = initialState, action) {
       return Object.assign({}, state, {
         ids: results.ids,
         posts: results.data
+      });
+    case TYPES.FETCHING_POST_LIST:
+      return Object.assign({}, state, {
+        fetching: action.payload.data
       });
     default:
       return state;
@@ -64,7 +73,9 @@ function getPostList ({ data }) {
  * @param {*} param
  */
 function * getPostListSaga ({ payload }) {
+  yield put(actions.fetchingPostList(true));
   const data = yield call(getPostList, payload);
+  yield put(actions.fetchingPostList(false));
   yield put(actions.receivePostList(data));
 }
 

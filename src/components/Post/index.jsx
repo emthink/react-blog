@@ -73,11 +73,11 @@ class Post extends Component {
   }
 
   get postRoute () {
-    return `/posts/${this.props.post.id}/`
+    return this.props.post.link;
   }
 
   render () {
-    const { classes, post, categories } = this.props
+    const { classes, post, categories } = this.props;
 
     return (
       <div className={'post-wrap'} ref={el => { this.wrapEl = el; }}>

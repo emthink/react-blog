@@ -13,6 +13,10 @@ export default {
     method: 'GET'
   },
   getPost: {
+    url: '/posts/',
+    method: 'GET'
+  },
+  getPostById: {
     url: '/posts/{id}',
     method: 'GET'
   },

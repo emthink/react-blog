@@ -31,9 +31,9 @@ class TOCContainer extends Component {
   }
 
   render () {
-    const { tocOrigin, toc, id, title } = this.props;
+    const { tocOrigin, toc, id, title, isArticlePage } = this.props;
 
-    if (!this.isArticlePage() || !title || tocOrigin === 'tocbot') {
+    if (!isArticlePage || !title || tocOrigin === 'tocbot') {
       // tocbot插件不需要使用组件渲染
       return null;
     }
@@ -44,7 +44,7 @@ class TOCContainer extends Component {
   }
 
   init (reset) {
-    if (this.isArticlePage()) {
+    if (this.props.isArticlePage) {
       this.time = 0;
       if (reset) {
         clearInterval(this.timer);

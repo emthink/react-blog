@@ -25,13 +25,13 @@ class CategoryListContainer extends Component {
   }
 
   render () {
-    const { ids, posts, match } = this.props;
+    const { ids, posts, match, fetching } = this.props;
     const { subslug } = match.params;
 
     return <div className={'category-content'}>
       {this.renderCategoryList()}
       {this.renderChildCategoryList()}
-      <CategoryList ids={ids} posts={posts} subslug={subslug} />
+      <CategoryList ids={ids} posts={posts} fetching={fetching} subslug={subslug} />
     </div>;
   }
 
@@ -95,6 +95,7 @@ class CategoryListContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   location: ownProps.location,
+  fetching: state.categoryList.fetching,
   ids: state.categoryList.ids,
   posts: state.categoryList.posts
 });
