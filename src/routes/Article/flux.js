@@ -8,6 +8,7 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { fetch, API } from 'api/';
 import moment from 'moment';
+import { formatPostData } from './dataAdapter';
 
 const SET_ARTICLE_POST_ID = 'SET_ARTICLE_POST_ID';
 const SET_ARTICLE_LINK = 'SET_ARTICLE_LINK';
@@ -106,30 +107,9 @@ export default function articleReducer (state = initialState, action = {}) {
 }
 
 /**
- * 格式化文章信息DataAdapter
- * @see see src/routes/Article/flux.js
- * @param {object} post post文章信息对象
+ * 请求文章内容
+ * @param {object} params
  */
-function formatPostData (post = {}) {
-  if (!post.id) {
-    return {};
-  }
-  return {
-    id: parseInt(post.id, 10),
-    title: post.title.rendered,
-    date: moment(post.date).format('YYYY-MM-DD HH:mm:ss'),
-    excerpt: post.excerpt.rendered,
-    content: post.content.rendered,
-    modified: moment(post.modified).format('YYYY-MM-DD HH:mm:ss'),
-    authorId: post.author,
-    categories: post.categories,
-    tags: post.tags,
-    comment_status: post.comment_status,
-    status: post.status,
-    link: post.link
-  };
-}
-
 function getPost (params = {}) {
   let options = {};
 
@@ -148,7 +128,7 @@ function getPost (params = {}) {
   }
   return fetch(options).then(res => {
     if (res && res.data) {
-      return formatPostData(res.data);
+      return formatPostData(res.data[0]);
     }
     return {};
   });
